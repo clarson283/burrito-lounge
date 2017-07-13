@@ -10,5 +10,15 @@
     "burrito"
   ],
   "author": "Callie Larson",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "babel-loader": "^7.1.1",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "less": "^2.7.2",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "webpack": "^3.2.0"
+  }
 }
