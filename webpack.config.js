@@ -1,10 +1,17 @@
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-    entry: './js/app.js',
+    // resolve: {
+    //     extensions: ['', '.js', '.jsx']
+    // },
+    // entry: './js/app.js',
+    entry: path.join(__dirname, 'js/app'),
     output: {
-        path: __dirname + '/dest',
-        filename: 'app.bundle.js'
+        path: path.join(__dirname, 'dest'),
+        filename: 'app.bundle.js',
+        publicPath: '/less/'
     },
     module: {
         loaders: [{
@@ -13,7 +20,15 @@ module.exports = {
             loader: 'babel-loader',
             query: {
                 presets: ['react']
-            }
-        }]
+            },
+            include: path.join(__dirname, 'js')
+        },
+        {
+			test: /\.less$/,
+			loader:  'style-loader!css-loader!less-loader'
+		}, {
+			test: /\.css$/,
+			loader: 'style-loader!css-loader'
+		}]
     }
 }

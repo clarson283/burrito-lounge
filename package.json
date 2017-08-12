@@ -12,17 +12,26 @@
   "author": "Callie Larson",
   "license": "ISC",
   "devDependencies": {
+    "EventEmitter": "^1.0.0",
     "babel-loader": "^7.1.1",
     "babel-polyfill": "^6.23.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.4",
+    "eventemitter3": "^2.0.3",
+    "extract-text-webpack-plugin": "^3.0.0",
     "less": "^2.7.2",
+    "less-loader": "^4.0.5",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "webpack": "^3.2.0"
+    "style-loader": "^0.18.2",
+    "webpack": "^3.2.0",
+    "webpack-dev-server": "^2.6.1"
   },
   "dependencies": {
+    "express": "^4.15.3",
     "flux": "^3.1.3",
-    "webpack": "^3.4.1"
+    "webpack": "^3.4.1",
+    "webpack-dev-server": "^2.6.1"
   }
 }
