@@ -9763,7 +9763,11 @@ var _reactDom = __webpack_require__(98);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _dispatcher = __webpack_require__(184);
+var _appConstants = __webpack_require__(184);
+
+var _appConstants2 = _interopRequireDefault(_appConstants);
+
+var _dispatcher = __webpack_require__(185);
 
 var _dispatcher2 = _interopRequireDefault(_dispatcher);
 
@@ -9776,7 +9780,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 // Load Stylesheets
-__webpack_require__(187);
+__webpack_require__(188);
 
 var App = function (_React$Component) {
     _inherits(App, _React$Component);
@@ -9788,14 +9792,6 @@ var App = function (_React$Component) {
     }
 
     _createClass(App, [{
-        key: 'addToList',
-        value: function addToList() {
-            _dispatcher2.default.dispatch({
-                actionName: 'add-to-list',
-                selectedItem: 'burrito'
-            });
-        }
-    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
@@ -22473,17 +22469,31 @@ module.exports = ReactDOMInvalidARIAHook;
 
 
 Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = {
+    actions: 'ADD_ITEM'
+};
+
+/***/ }),
+/* 185 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _flux = __webpack_require__(185);
+var _flux = __webpack_require__(186);
 
 var AppDispatcher = new _flux.Dispatcher();
 
 exports.default = AppDispatcher;
 
 /***/ }),
-/* 185 */
+/* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -22495,11 +22505,11 @@ exports.default = AppDispatcher;
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
-module.exports.Dispatcher = __webpack_require__(186);
+module.exports.Dispatcher = __webpack_require__(187);
 
 
 /***/ }),
-/* 186 */
+/* 187 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22737,13 +22747,13 @@ module.exports = Dispatcher;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 187 */
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(188);
+var content = __webpack_require__(189);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -22751,7 +22761,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(190)(content, options);
+var update = __webpack_require__(191)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -22768,10 +22778,10 @@ if(false) {
 }
 
 /***/ }),
-/* 188 */
+/* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(189)(undefined);
+exports = module.exports = __webpack_require__(190)(undefined);
 // imports
 
 
@@ -22782,7 +22792,7 @@ exports.push([module.i, "body {\n  background: #f3f3f3;\n}\nbody .addition-conta
 
 
 /***/ }),
-/* 189 */
+/* 190 */
 /***/ (function(module, exports) {
 
 /*
@@ -22864,7 +22874,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 190 */
+/* 191 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -22910,7 +22920,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(191);
+var	fixUrls = __webpack_require__(192);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -23223,7 +23233,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 191 */
+/* 192 */
 /***/ (function(module, exports) {
 
 

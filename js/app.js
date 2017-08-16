@@ -1,18 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import constants from './constants/appConstants.js';
 import AppDispatcher from './dispatcher.js';
 
 // Load Stylesheets
 require('../less/main.less');
 
 export default class App extends React.Component {
-
-    addToList(param) {
-        AppDispatcher.dispatch({
-            actionName: constants.actions.ADD_ITEM,
-            param
-        });
-    }
 
     render() {
         return(

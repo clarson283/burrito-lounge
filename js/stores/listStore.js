@@ -1,5 +1,5 @@
 import EventEmitter from 'EventEmitter';
-import constants from 'constants/appConstants';
+import constants from './constants/appConstants';
 import AppDispatcher from './dispatcher.js';
 
 const CHANGE_event = 'change';
