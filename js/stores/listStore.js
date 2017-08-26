@@ -1,25 +1,37 @@
-import EventEmitter from 'EventEmitter';
-import constants from './constants/appConstants';
-import AppDispatcher from './dispatcher.js';
+import { EventEmitter } from 'events';
+// import constants from '../constants/appConstants';
+import AppDispatcher from '../dispatcher.js';
 
 const CHANGE_event = 'change';
 
-// let ListStore = {
-//     list: []
-// };
+// let eventEmitter = new EventEmitter();
 
-class ListStoreClass extends EventEmitter {
+let list = {
+    listArray: []
+};
 
+// let EvEmitter = new EventEmitter();
+
+class ListStore extends EventEmitter {
+
+    emitChange() {
+		this.emit(CHANGE_EVENT);
+	}
+
+    addChangeListener(callback) {
+		this.on(CHANGE_EVENT, callback);
+	}
 }
 
-const ListStore = new ListStoreClass();
+// let listStore = new ListStore();
 
 AppDispatcher.register((payload) => {
     const action = payload.action;
 
     switch (action.actionType) {
         case constants.actions.ADD_ITEM:
-            ListStore.emit(CHANGE_EVENT)
+            list.listArray.push(payload.newItem);
+            listStore.emitChange();
             break;
     }
 
@@ -27,3 +39,5 @@ AppDispatcher.register((payload) => {
     //     ListStore.city = payload.selectedItem;
     // }
 });
+
+export default ListStore;
