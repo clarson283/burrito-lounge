@@ -1,6 +1,5 @@
 import App from '../app.js';
-import {Component} from 'react';
-import Container from 'flux/utils';
+import { Container } from 'flux/utils';
 import ListStore from '../stores/listStore.js';
 
 function getStores() {
@@ -15,4 +14,4 @@ function getState() {
     };
 }
 
-export default Container.create(App, getStores, getState);
+export default Container.createFunctional(App, getStores, getState);
