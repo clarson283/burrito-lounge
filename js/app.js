@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+// import AppContainer from './containers/AppContainer.js';
 import constants from './constants/appConstants.js';
 import appActions from './actions/appActions.js';
 // import AppDispatcher from './dispatcher.js';
@@ -8,7 +9,7 @@ import ListStore from './stores/listStore.js';
 // Load Stylesheets
 require('../less/main.less');
 
-export default class App extends React.Component {
+class App extends React.Component {
 
     constructor(props) {
         super(props);
@@ -56,4 +57,5 @@ export default class App extends React.Component {
     }
 }
 
-ReactDOM.render(<App />, document.getElementById("root"));
+export default App;
+// ReactDOM.render(<App />, document.getElementById("root"));

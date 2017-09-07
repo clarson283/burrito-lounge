@@ -7,7 +7,7 @@ module.exports = {
     //     extensions: ['', '.js', '.jsx']
     // },
     // entry: './js/app.js',
-    entry: path.join(__dirname, 'js/app'),
+    entry: path.join(__dirname, 'js/root'),
     output: {
         path: path.join(__dirname, 'dest'),
         filename: 'app.bundle.js',
