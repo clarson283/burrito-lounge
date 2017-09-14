@@ -1,17 +1,25 @@
+import Component from 'react';
 import App from '../app.js';
 import { Container } from 'flux/utils';
 import ListStore from '../stores/listStore.js';
 
-function getStores() {
-    return [
-        ListStore,
-    ];
+class myContainer extends Component {
+
+    static getStores() {
+        return [
+            ListStore,
+        ];
+    }
+
+    static calculateState() {
+        return {
+            list: ListStore.getState(),
+        };
+    }
+
+    render() {
+        return <App list={this.state.list} />;
+    }
 }
 
-function getState() {
-    return {
-        list: ListStore.getState(),
-    };
-}
-
-export default Container.createFunctional(App, getStores, getState);
+const container = Container.create(myContainer);

@@ -14,6 +14,23 @@ let list = {
 
 class ListStore extends EventEmitter {
 
+    getInitialState(): number {
+        return 0;
+    }
+
+    reduce(state: number, action: Object): number {
+        switch (action.type) {
+            case 'increment':
+                return state + 1;
+
+            case 'square':
+                return state * state;
+
+            default:
+                return state;
+        }
+    }
+
     emitChange() {
 		this.emit(CHANGE_EVENT);
 	}
