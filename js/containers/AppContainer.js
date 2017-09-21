@@ -1,9 +1,9 @@
-import Component from 'react';
+import React from 'react';
 import App from '../app.js';
 import { Container } from 'flux/utils';
-import ListStore from '../stores/listStore.js';
+import { ListStore } from '../stores/listStore.js';
 
-class myContainer extends Component {
+export default class myContainer extends React.Component {
 
     static getStores() {
         return [
@@ -22,4 +22,4 @@ class myContainer extends Component {
     }
 }
 
-const container = Container.create(myContainer);
+const contain = Container.create(myContainer);

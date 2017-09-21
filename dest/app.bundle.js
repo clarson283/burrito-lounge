@@ -10175,6 +10175,10 @@ _reactDom2.default.render(_react2.default.createElement(_AppContainer2.default, 
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(24);
@@ -10189,8 +10193,6 @@ var _utils = __webpack_require__(201);
 
 var _listStore = __webpack_require__(85);
 
-var _listStore2 = _interopRequireDefault(_listStore);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10199,8 +10201,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var myContainer = function (_Component) {
-    _inherits(myContainer, _Component);
+var myContainer = function (_React$Component) {
+    _inherits(myContainer, _React$Component);
 
     function myContainer() {
         _classCallCheck(this, myContainer);
@@ -10211,26 +10213,29 @@ var myContainer = function (_Component) {
     _createClass(myContainer, [{
         key: 'render',
         value: function render() {
-            return React.createElement(_app2.default, { list: this.state.list });
+            return _react2.default.createElement(_app2.default, { list: this.state.list });
         }
     }], [{
         key: 'getStores',
         value: function getStores() {
-            return [_listStore2.default];
+            return [_listStore.ListStore];
         }
     }, {
         key: 'calculateState',
         value: function calculateState() {
             return {
-                list: _listStore2.default.getState()
+                list: _listStore.ListStore.getState()
             };
         }
     }]);
 
     return myContainer;
-}(_react2.default);
+}(_react2.default.Component);
 
-var container = _utils.Container.create(myContainer);
+exports.default = myContainer;
+
+
+var contain = _utils.Container.create(myContainer);
 
 /***/ }),
 /* 91 */
