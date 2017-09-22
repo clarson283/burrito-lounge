@@ -1,5 +1,5 @@
 import React from 'react';
-import App from '../app.js';
+import App from '../reactApp.js';
 import { Container } from 'flux/utils';
 import { ListStore } from '../stores/listStore.js';
 
@@ -18,7 +18,8 @@ export default class myContainer extends React.Component {
     }
 
     render() {
-        return <App list={this.state.list} />;
+        return <App />;
+        // return <App list={this.state.list} />;
     }
 }
 

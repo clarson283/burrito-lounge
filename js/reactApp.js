@@ -16,6 +16,12 @@ class App extends React.Component {
         // this.state = {
         //     order: props.items
         // }
+        this.state = {value: ''};
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(event) {
+        this.setState({value: event.target.value});
     }
 
     // componentDidMount() {
@@ -46,7 +52,7 @@ class App extends React.Component {
             <div>
                 <div className="addition-container">
                     <p>Hello Burrito!!</p>
-                    <input></input>
+                    <input onChange={this.handleChange} value={this.state.value}></input>
                     <button onClick={this.addToList}>Add To List</button>
                     <ul>
                         {listItem}

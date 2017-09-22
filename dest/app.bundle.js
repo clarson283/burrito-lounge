@@ -10185,9 +10185,9 @@ var _react = __webpack_require__(24);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _app = __webpack_require__(106);
+var _reactApp = __webpack_require__(106);
 
-var _app2 = _interopRequireDefault(_app);
+var _reactApp2 = _interopRequireDefault(_reactApp);
 
 var _utils = __webpack_require__(201);
 
@@ -10213,7 +10213,8 @@ var myContainer = function (_React$Component) {
     _createClass(myContainer, [{
         key: 'render',
         value: function render() {
-            return _react2.default.createElement(_app2.default, { list: this.state.list });
+            return _react2.default.createElement(_reactApp2.default, null);
+            // return <App list={this.state.list} />;
         }
     }], [{
         key: 'getStores',
@@ -12756,27 +12757,37 @@ var App = function (_React$Component) {
     function App(props) {
         _classCallCheck(this, App);
 
-        return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
         // this.state = {
         //     order: props.items
         // }
+        var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+        _this.state = { value: '' };
+        _this.handleChange = _this.handleChange.bind(_this);
+        return _this;
     }
 
-    // componentDidMount() {
-    //     ListStore.bind('change', this.listUpdated);
-    // }
-    //
-    // componentWillUnmount() {
-    //     ListStore.unbind('change', this.listUpdated);
-    // }
-    //
-    // listUpdated() {
-    //     this.setState = {(
-    //
-    //     )}
-    // }
-
     _createClass(App, [{
+        key: 'handleChange',
+        value: function handleChange(event) {
+            this.setState({ value: event.target.value });
+        }
+
+        // componentDidMount() {
+        //     ListStore.bind('change', this.listUpdated);
+        // }
+        //
+        // componentWillUnmount() {
+        //     ListStore.unbind('change', this.listUpdated);
+        // }
+        //
+        // listUpdated() {
+        //     this.setState = {(
+        //
+        //     )}
+        // }
+
+    }, {
         key: 'render',
         value: function render() {
 
@@ -12799,7 +12810,7 @@ var App = function (_React$Component) {
                         null,
                         'Hello Burrito!!'
                     ),
-                    _react2.default.createElement('input', null),
+                    _react2.default.createElement('input', { onChange: this.handleChange, value: this.state.value }),
                     _react2.default.createElement(
                         'button',
                         { onClick: this.addToList },
