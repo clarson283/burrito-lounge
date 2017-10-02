@@ -1,0 +1,120 @@
+2017-09-30T20:43:06.896059000 0.478147s notice: Recursively removing directory /Users/CallieLarson/Documents/burrito-lounge/rethinkdb_data/tmp
+2017-09-30T20:43:06.897991000 0.480082s notice: Initializing directory /Users/CallieLarson/Documents/burrito-lounge/rethinkdb_data
+2017-09-30T20:43:06.898545000 0.480632s info: Creating a default database for your convenience. (This is because you ran 'rethinkdb' without 'create', 'serve', or '--join', and the directory '/Users/CallieLarson/Documents/burrito-lounge/rethinkdb_data' did not already exist or is empty.)
+2017-09-30T20:43:06.898588000 0.480675s notice: Running rethinkdb 2.3.6 (CLANG 7.0.2 (clang-700.1.81))...
+2017-09-30T20:43:06.904629000 0.486717s notice: Running on Darwin 14.5.0 x86_64
+2017-09-30T20:43:06.904680000 0.486767s notice: Loading data from directory /Users/CallieLarson/Documents/burrito-lounge/rethinkdb_data
+2017-09-30T20:43:07.045007000 0.627094s info: Automatically using cache size of 124 MB
+2017-09-30T20:43:07.045494000 0.627581s notice: Listening for intracluster connections on port 29015
+2017-09-30T20:43:07.048394000 0.630481s notice: Listening for client driver connections on port 28015
+2017-09-30T20:43:07.048593000 0.630680s notice: Listening for administrative HTTP connections on port 8080
+2017-09-30T20:43:07.048598000 0.630684s notice: Listening on cluster addresses: 127.0.0.1, ::1
+2017-09-30T20:43:07.048604000 0.630690s notice: Listening on driver addresses: 127.0.0.1, ::1
+2017-09-30T20:43:07.048606000 0.630693s notice: Listening on http addresses: 127.0.0.1, ::1
+2017-09-30T20:43:07.048612000 0.630698s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2017-09-30T20:43:07.048617000 0.630704s notice: Server ready, "Callies_MBP_4jw" e5c37104-ed4d-420d-a56b-077033c619b1
+2017-09-30T20:43:39.842869000 33.424333s notice: Server got SIGINT from pid 229, uid 501; shutting down...
+2017-09-30T20:43:39.842968000 33.424432s notice: Shutting down client connections...
+2017-09-30T20:43:39.843134000 33.424598s notice: All client connections closed.
+2017-09-30T20:43:39.843142000 33.424605s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2017-09-30T20:43:39.853063000 33.434527s notice: Storage engine shut down.
+2017-09-30T20:44:00.143070000 0.406166s notice: Running rethinkdb 2.3.6 (CLANG 7.0.2 (clang-700.1.81))...
+2017-09-30T20:44:00.146872000 0.409964s notice: Running on Darwin 14.5.0 x86_64
+2017-09-30T20:44:00.146916000 0.410006s notice: Loading data from directory /Users/CallieLarson/Documents/burrito-lounge/rethinkdb_data
+2017-09-30T20:44:00.195415000 0.458505s info: Automatically using cache size of 128 MB
+2017-09-30T20:44:00.195941000 0.459031s notice: Listening for intracluster connections on port 29015
+2017-09-30T20:44:00.197315000 0.460405s notice: Listening for client driver connections on port 28015
+2017-09-30T20:44:00.197539000 0.460629s notice: Listening for administrative HTTP connections on port 8080
+2017-09-30T20:44:00.197542000 0.460632s notice: Listening on cluster addresses: 127.0.0.1, ::1
+2017-09-30T20:44:00.197546000 0.460636s notice: Listening on driver addresses: 127.0.0.1, ::1
+2017-09-30T20:44:00.197548000 0.460638s notice: Listening on http addresses: 127.0.0.1, ::1
+2017-09-30T20:44:00.197551000 0.460641s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2017-09-30T20:44:00.197555000 0.460645s notice: Server ready, "Callies_MBP_4jw" e5c37104-ed4d-420d-a56b-077033c619b1
+2017-09-30T20:44:02.475070000 2.738125s notice: Server got SIGINT from pid 229, uid 501; shutting down...
+2017-09-30T20:44:02.475179000 2.738233s notice: Shutting down client connections...
+2017-09-30T20:44:02.475309000 2.738364s notice: All client connections closed.
+2017-09-30T20:44:02.475320000 2.738374s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2017-09-30T20:44:02.475838000 2.738892s notice: Storage engine shut down.
+2017-09-30T20:44:11.321049000 0.750267s notice: Running rethinkdb 2.3.6 (CLANG 7.0.2 (clang-700.1.81))...
+2017-09-30T20:44:11.324799000 0.754014s notice: Running on Darwin 14.5.0 x86_64
+2017-09-30T20:44:11.324839000 0.754053s notice: Loading data from directory /Users/CallieLarson/Documents/burrito-lounge/rethinkdb_data
+2017-09-30T20:44:11.354167000 0.783381s info: Automatically using cache size of 129 MB
+2017-09-30T20:44:11.354618000 0.783832s notice: Listening for intracluster connections on port 29015
+2017-09-30T20:44:11.355982000 0.785196s notice: Listening for client driver connections on port 28015
+2017-09-30T20:44:11.356114000 0.785328s notice: Listening for administrative HTTP connections on port 8080
+2017-09-30T20:44:11.356117000 0.785331s notice: Listening on cluster addresses: 127.0.0.1, ::1
+2017-09-30T20:44:11.356123000 0.785337s notice: Listening on driver addresses: 127.0.0.1, ::1
+2017-09-30T20:44:11.356125000 0.785339s notice: Listening on http addresses: 127.0.0.1, ::1
+2017-09-30T20:44:11.356131000 0.785345s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2017-09-30T20:44:11.356138000 0.785352s notice: Server ready, "Callies_MBP_4jw" e5c37104-ed4d-420d-a56b-077033c619b1
+2017-09-30T20:50:52.906687000 402.328355s notice: Server got SIGINT from pid 229, uid 501; shutting down...
+2017-09-30T20:50:52.906813000 402.328481s notice: Shutting down client connections...
+2017-09-30T20:50:52.915856000 402.337525s notice: All client connections closed.
+2017-09-30T20:50:52.915874000 402.337542s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2017-09-30T20:50:52.916252000 402.337920s notice: Storage engine shut down.
+2017-09-30T20:51:07.472153000 0.408779s notice: Running rethinkdb 2.3.6 (CLANG 7.0.2 (clang-700.1.81))...
+2017-09-30T20:51:07.491362000 0.427985s notice: Running on Darwin 14.5.0 x86_64
+2017-09-30T20:51:07.491402000 0.428024s notice: Loading data from directory /Users/CallieLarson/Documents/burrito-lounge/rethinkdb_data
+2017-09-30T20:51:07.517522000 0.454144s info: Automatically using cache size of 100 MB
+2017-09-30T20:51:07.517530000 0.454152s warn: Cache size is very low and may impact performance.
+2017-09-30T20:51:07.519078000 0.455700s notice: Listening for intracluster connections on port 29015
+2017-09-30T20:51:07.520366000 0.456989s notice: Listening for client driver connections on port 28015
+2017-09-30T20:51:07.520568000 0.457190s notice: Listening for administrative HTTP connections on port 8080
+2017-09-30T20:51:07.521153000 0.457776s notice: Listening on cluster addresses: 127.0.0.1, 192.168.1.120, ::1, 2600:8801:9600:c2:82e6:50ff:fe09:dc86, 2600:8801:9600:c2:a189:d0d6:adde:978, fe80::1%1, fe80::2ecd:973b:b430:110%10, fe80::82e6:50ff:fe09:dc86%4, fe80::9880:71ff:fedc:bcf7%6
+2017-09-30T20:51:07.521946000 0.458569s notice: Listening on driver addresses: 127.0.0.1, 192.168.1.120, ::1, 2600:8801:9600:c2:82e6:50ff:fe09:dc86, 2600:8801:9600:c2:a189:d0d6:adde:978, fe80::1%1, fe80::2ecd:973b:b430:110%10, fe80::82e6:50ff:fe09:dc86%4, fe80::9880:71ff:fedc:bcf7%6
+2017-09-30T20:51:07.522608000 0.459231s notice: Listening on http addresses: 127.0.0.1, 192.168.1.120, ::1, 2600:8801:9600:c2:82e6:50ff:fe09:dc86, 2600:8801:9600:c2:a189:d0d6:adde:978, fe80::1%1, fe80::2ecd:973b:b430:110%10, fe80::82e6:50ff:fe09:dc86%4, fe80::9880:71ff:fedc:bcf7%6
+2017-09-30T20:51:07.522620000 0.459242s notice: Server ready, "Callies_MBP_4jw" e5c37104-ed4d-420d-a56b-077033c619b1
+2017-09-30T21:12:29.987398000 1282.899860s notice: Server got SIGINT from pid 229, uid 501; shutting down...
+2017-09-30T21:12:29.987583000 1282.900046s notice: Shutting down client connections...
+2017-09-30T21:12:29.987765000 1282.900228s notice: All client connections closed.
+2017-09-30T21:12:29.987794000 1282.900256s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2017-09-30T21:12:29.988451000 1282.900914s notice: Storage engine shut down.
+2017-09-30T21:12:31.313954000 0.418641s notice: Running rethinkdb 2.3.6 (CLANG 7.0.2 (clang-700.1.81))...
+2017-09-30T21:12:31.319280000 0.423964s notice: Running on Darwin 14.5.0 x86_64
+2017-09-30T21:12:31.319322000 0.424004s notice: Loading data from directory /Users/CallieLarson/Documents/burrito-lounge/rethinkdb_data
+2017-09-30T21:12:31.352381000 0.457064s info: Automatically using cache size of 128 MB
+2017-09-30T21:12:31.355610000 0.460293s notice: Listening for intracluster connections on port 29015
+2017-09-30T21:12:31.357549000 0.462232s notice: Listening for client driver connections on port 28015
+2017-09-30T21:12:31.357977000 0.462660s notice: Listening for administrative HTTP connections on port 8080
+2017-09-30T21:12:31.358418000 0.463101s notice: Listening on cluster addresses: 127.0.0.1, 192.168.1.120, ::1, 2600:8801:9600:c2:82e6:50ff:fe09:dc86, 2600:8801:9600:c2:a189:d0d6:adde:978, fe80::1%1, fe80::2ecd:973b:b430:110%10, fe80::82e6:50ff:fe09:dc86%4, fe80::9880:71ff:fedc:bcf7%6
+2017-09-30T21:12:31.359051000 0.463734s notice: Listening on driver addresses: 127.0.0.1, 192.168.1.120, ::1, 2600:8801:9600:c2:82e6:50ff:fe09:dc86, 2600:8801:9600:c2:a189:d0d6:adde:978, fe80::1%1, fe80::2ecd:973b:b430:110%10, fe80::82e6:50ff:fe09:dc86%4, fe80::9880:71ff:fedc:bcf7%6
+2017-09-30T21:12:31.359465000 0.464147s notice: Listening on http addresses: 127.0.0.1, 192.168.1.120, ::1, 2600:8801:9600:c2:82e6:50ff:fe09:dc86, 2600:8801:9600:c2:a189:d0d6:adde:978, fe80::1%1, fe80::2ecd:973b:b430:110%10, fe80::82e6:50ff:fe09:dc86%4, fe80::9880:71ff:fedc:bcf7%6
+2017-09-30T21:12:31.359473000 0.464155s notice: Server ready, "Callies_MBP_4jw" e5c37104-ed4d-420d-a56b-077033c619b1
+2017-09-30T21:13:55.484450000 84.587519s notice: Server got SIGINT from pid 229, uid 501; shutting down...
+2017-09-30T21:13:55.484555000 84.587624s notice: Shutting down client connections...
+2017-09-30T21:13:55.484675000 84.587743s notice: All client connections closed.
+2017-09-30T21:13:55.484685000 84.587753s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2017-09-30T21:13:55.485228000 84.588297s notice: Storage engine shut down.
+2017-09-30T21:14:05.942259000 0.426272s notice: Running rethinkdb 2.3.6 (CLANG 7.0.2 (clang-700.1.81))...
+2017-09-30T21:14:05.946019000 0.430029s notice: Running on Darwin 14.5.0 x86_64
+2017-09-30T21:14:05.946076000 0.430084s notice: Loading data from directory /Users/CallieLarson/Documents/burrito-lounge/rethinkdb_data
+2017-09-30T21:14:05.984264000 0.468273s info: Automatically using cache size of 137 MB
+2017-09-30T21:14:05.985864000 0.469873s notice: Listening for intracluster connections on port 29015
+2017-09-30T21:14:05.987154000 0.471163s notice: Listening for client driver connections on port 28015
+2017-09-30T21:14:05.987360000 0.471369s notice: Listening for administrative HTTP connections on port 8080
+2017-09-30T21:14:05.987746000 0.471755s notice: Listening on cluster addresses: 127.0.0.1, 192.168.1.120, ::1, 2600:8801:9600:c2:82e6:50ff:fe09:dc86, 2600:8801:9600:c2:a189:d0d6:adde:978, fe80::1%1, fe80::2ecd:973b:b430:110%10, fe80::82e6:50ff:fe09:dc86%4, fe80::9880:71ff:fedc:bcf7%6
+2017-09-30T21:14:05.988256000 0.472265s notice: Listening on driver addresses: 127.0.0.1, 192.168.1.120, ::1, 2600:8801:9600:c2:82e6:50ff:fe09:dc86, 2600:8801:9600:c2:a189:d0d6:adde:978, fe80::1%1, fe80::2ecd:973b:b430:110%10, fe80::82e6:50ff:fe09:dc86%4, fe80::9880:71ff:fedc:bcf7%6
+2017-09-30T21:14:05.988714000 0.472722s notice: Listening on http addresses: 127.0.0.1, 192.168.1.120, ::1, 2600:8801:9600:c2:82e6:50ff:fe09:dc86, 2600:8801:9600:c2:a189:d0d6:adde:978, fe80::1%1, fe80::2ecd:973b:b430:110%10, fe80::82e6:50ff:fe09:dc86%4, fe80::9880:71ff:fedc:bcf7%6
+2017-09-30T21:14:05.988721000 0.472730s notice: Server ready, "Callies_MBP_4jw" e5c37104-ed4d-420d-a56b-077033c619b1
+2017-10-01T00:15:14.073443000 7797.299724s notice: Server got SIGINT from pid 229, uid 501; shutting down...
+2017-10-01T00:15:14.073626000 7797.299907s notice: Shutting down client connections...
+2017-10-01T00:15:14.073808000 7797.300089s notice: All client connections closed.
+2017-10-01T00:15:14.073816000 7797.300097s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2017-10-01T00:15:14.074380000 7797.300661s notice: Storage engine shut down.
+2017-10-01T00:17:00.167282000 0.410442s notice: Running rethinkdb 2.3.6 (CLANG 7.0.2 (clang-700.1.81))...
+2017-10-01T00:17:00.186536000 0.429691s notice: Running on Darwin 14.5.0 x86_64
+2017-10-01T00:17:00.186576000 0.429729s notice: Loading data from directory /Users/CallieLarson/Documents/burrito-lounge/rethinkdb_data
+2017-10-01T00:17:00.223900000 0.467054s info: Automatically using cache size of 508 MB
+2017-10-01T00:17:00.225524000 0.468677s notice: Listening for intracluster connections on port 29015
+2017-10-01T00:17:00.226811000 0.469965s notice: Listening for client driver connections on port 28015
+2017-10-01T00:17:00.227073000 0.470227s notice: Listening for administrative HTTP connections on port 8080
+2017-10-01T00:17:00.227567000 0.470721s notice: Listening on cluster addresses: 127.0.0.1, 192.168.1.120, ::1, 2600:8801:9600:c2:64fd:f37c:8da0:d921, 2600:8801:9600:c2:82e6:50ff:fe09:dc86, fe80::1%1, fe80::2ecd:973b:b430:110%10, fe80::82e6:50ff:fe09:dc86%4, fe80::9880:71ff:fedc:bcf7%6
+2017-10-01T00:17:00.228000000 0.471154s notice: Listening on driver addresses: 127.0.0.1, 192.168.1.120, ::1, 2600:8801:9600:c2:64fd:f37c:8da0:d921, 2600:8801:9600:c2:82e6:50ff:fe09:dc86, fe80::1%1, fe80::2ecd:973b:b430:110%10, fe80::82e6:50ff:fe09:dc86%4, fe80::9880:71ff:fedc:bcf7%6
+2017-10-01T00:17:00.228433000 0.471587s notice: Listening on http addresses: 127.0.0.1, 192.168.1.120, ::1, 2600:8801:9600:c2:64fd:f37c:8da0:d921, 2600:8801:9600:c2:82e6:50ff:fe09:dc86, fe80::1%1, fe80::2ecd:973b:b430:110%10, fe80::82e6:50ff:fe09:dc86%4, fe80::9880:71ff:fedc:bcf7%6
+2017-10-01T00:17:00.228441000 0.471594s notice: Server ready, "Callies_MBP_4jw" e5c37104-ed4d-420d-a56b-077033c619b1
+2017-10-01T19:20:25.164554000 16417.651915s info: Table b83b1491-1d71-4eee-a6d7-0b3aa8b3e6fa: Starting a new Raft election for term 1.
+2017-10-01T19:20:25.165223000 16417.652584s info: Table b83b1491-1d71-4eee-a6d7-0b3aa8b3e6fa: Added replica on this server.
+2017-10-01T19:20:25.175316000 16417.662677s info: Table b83b1491-1d71-4eee-a6d7-0b3aa8b3e6fa: This server is Raft leader for term 1. Latest log index is 0.
+2017-10-01T20:06:20.367453000 17584.938071s info: Table 34a90f26-d43f-4f65-a364-b3110533a03f: Starting a new Raft election for term 1.
+2017-10-01T20:06:20.367877000 17584.938495s info: Table 34a90f26-d43f-4f65-a364-b3110533a03f: Added replica on this server.
+2017-10-01T20:06:20.376439000 17584.947056s info: Table 34a90f26-d43f-4f65-a364-b3110533a03f: This server is Raft leader for term 1. Latest log index is 0.
