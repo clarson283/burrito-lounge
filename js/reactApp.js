@@ -5,6 +5,7 @@ import constants from './constants/appConstants.js';
 import appActions from './actions/appActions.js';
 // import AppDispatcher from './dispatcher.js';
 import ListStore from './stores/listStore.js';
+import $ from 'jquery';
 
 // Load Stylesheets
 require('../less/main.less');
@@ -22,6 +23,13 @@ class App extends React.Component {
 
     handleChange(event) {
         this.setState({value: event.target.value});
+    }
+
+    function addItem() {
+        let url = '/todos',
+            data = { order: $('input').val() };
+
+        $.post(url, data);
     }
 
     // componentDidMount() {
@@ -53,7 +61,7 @@ class App extends React.Component {
                 <div className="addition-container">
                     <p>Hello Burrito!!</p>
                     <input onChange={this.handleChange} value={this.state.value}></input>
-                    <button onClick={this.addToList}>Add To List</button>
+                    <button onClick={this.addItem}>Add To List</button>
                     <ul>
                         {listItem}
                     </ul>
