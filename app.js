@@ -2,40 +2,36 @@ var async = require('async');
 var express = require('express');
 var path = require('path');
 var app = express();
-var port = 3000;
 var bodyParser = require('body-parser');
 var r = require('rethinkdb');
+
+var config = require(__dirname + '/config.js');
 
 
 app.use(express.static(__dirname + '/dest'));
 
-// app.use("/", (req, res) => {
-//  res.sendFile(__dirname + '/dest');
-// });
-
-app.use((req, res) => {
-    res.status(400);
-    res.send('404: This Shit Is Broken');
-});
-
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //The REST routes for "orders".
 app.route('/orders')
-  .get(listTodoItems)
-  .post(createTodoItem);
+    .get(listTodoItems)
+    .post(createTodoItem);
 
 app.route('/orders/:id')
-  .get(getTodoItem)
-  .put(updateTodoItem)
-  .delete(deleteTodoItem);
+    .get(getTodoItem)
+    .put(updateTodoItem)
+    .delete(deleteTodoItem);
+
+app.route('*', (req, res) => {
+    res.sendStatus(404);
+});
 
 //If we reach this middleware the route could not be handled and must be unknown.
 app.use(handle404);
 
 //Generic error handling middleware.
 app.use(handleError);
-
 
 /*
  * Retrieve all todo items.
@@ -61,12 +57,23 @@ function listTodoItems(req, res, next) {
  * Insert a new todo item.
  */
 function createTodoItem(req, res, next) {
-  var todoItem = req.body;
-  todoItem.createdAt = r.now();
+  // var newOrder = req.body;
+  // newOrder.createdAt = r.now();
+  //
+  // console.dir(newOrder);
 
-  console.dir(todoItem);
+  console.log(req);
 
-  r.table('orders').insert(todoItem, {returnChanges: true}).run(req.app._rdbConn, function(err, result) {
+  // if(!req.body.user_id || !req.body.item_id) return res.sendStatus(400);
+  //
+  const newOrder = {
+    order: req.body.order,
+    // user_id: req.body.user_id,
+    // item_id: req.body.item_id,
+    created_at: r.now()
+  };
+
+  r.table('orders').insert(newOrder, {returnChanges: true}).run(req.app._rdbConn, function(err, result) {
     if(err) {
       return next(err);
     }
@@ -147,36 +154,24 @@ function startExpress(connection) {
 }
 
 
-// var connection = null;
-// r.connect( {host: 'localhost', port: 28015}, function(err, conn) {
-//     if (err) throw err;
-//     connection = conn;
-//
-//     // r.db('test').tableCreate('authors').run(connection, function(err, result) {
-//     //     if (err) throw err;
-//     //     console.log(JSON.stringify(result, null, 2));
-//     // });
-// });
-//
-// r.db('test').tableCreate('authors').run(connection, function(err, result) {
-//     if (err) throw err;
-//     console.log(JSON.stringify(result, null, 2));
-// });
+app.use((rq, res, next) => {
+    r.connect(config.rethinkdb)
+        .then(conn => {
+            req.dbConnection = conn;
 
-function startExpress(connection) {
-    app.listen(port, () => {
-     console.log("Server listening on port " + port);
-    });
-}
+            next();
+        })
+        .catch(e => {
+            console.error(e);
+
+            res.sendStatus(500);
+        })
+});
+
 
 async.waterfall([
     function connect(callback) {
-        r.connect({
-            host: 'localhost',
-            port: 28015//,
-            // authKey: '',
-            // db: 'BURRITOBASE'
-        }, callback)
+        r.connect(config.rethinkdb, callback)
     },
     function createDatabase(connection, callback) {
         //Create the database if needed.
@@ -201,8 +196,25 @@ async.waterfall([
         }).run(connection, function(err) {
             callback(err, connection);
         });
-        console.log(connection);
-
+    },
+    function createIndex(connection, callback) {
+        //Create the index if needed.
+        r.table('orders').indexList().contains('createdAt').do(function(hasIndex) {
+            return r.branch(
+                hasIndex,
+                {created: 0},
+                r.table('orders').indexCreate('createdAt')
+            );
+        }).run(connection, function(err) {
+            console.log(connection);
+            callback(err, connection);
+        });
+    },
+    function waitForIndex(connection, callback) {
+        //Wait for the index to be ready.
+        r.table('orders').indexWait('createdAt').run(connection, function(err, result) {
+            callback(err, connection);
+        });
     }], function(err, connection) {
         if(err) {
             console.error(err);
@@ -211,5 +223,10 @@ async.waterfall([
     }
 
     startExpress(connection);
+});
+
+app.use((req, res) => {
+    res.status(400);
+    res.send('404: This Shit Is Broken');
 });
 

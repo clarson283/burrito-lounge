@@ -25,9 +25,12 @@ class App extends React.Component {
         this.setState({value: event.target.value});
     }
 
-    function addItem() {
-        let url = '/todos',
+    addItem() {
+        let url = '/orders',
             data = { order: $('input').val() };
+
+        console.log(url);
+        console.log(data);
 
         $.post(url, data);
     }
