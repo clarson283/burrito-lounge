@@ -12788,6 +12788,10 @@ var App = function (_React$Component) {
             _jquery2.default.post(url, data);
         }
 
+        // const menuArray = function() {
+        //     $.get('/menu');
+        // }
+
         // componentDidMount() {
         //     ListStore.bind('change', this.listUpdated);
         // }
@@ -12824,6 +12828,15 @@ var App = function (_React$Component) {
                         'p',
                         null,
                         'Hello Burrito!!'
+                    ),
+                    _react2.default.createElement(
+                        'ul',
+                        null,
+                        _react2.default.createElement(
+                            'li',
+                            null,
+                            menuArray
+                        )
                     ),
                     _react2.default.createElement('input', { onChange: this.handleChange, value: this.state.value }),
                     _react2.default.createElement(

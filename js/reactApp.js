@@ -35,6 +35,10 @@ class App extends React.Component {
         $.post(url, data);
     }
 
+    // const menuArray = function() {
+    //     $.get('/menu');
+    // }
+
     // componentDidMount() {
     //     ListStore.bind('change', this.listUpdated);
     // }
@@ -63,6 +67,9 @@ class App extends React.Component {
             <div>
                 <div className="addition-container">
                     <p>Hello Burrito!!</p>
+                    <ul>
+                        <li>{menuArray}</li>
+                    </ul>
                     <input onChange={this.handleChange} value={this.state.value}></input>
                     <button onClick={this.addItem}>Add To List</button>
                     <ul>

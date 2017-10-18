@@ -14,6 +14,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //The REST routes for "orders".
+app.route('/menu')
+    .get(getMenuItems);
+
 app.route('/orders')
     .get(listTodoItems)
     .post(createTodoItem);
@@ -32,6 +35,26 @@ app.use(handle404);
 
 //Generic error handling middleware.
 app.use(handleError);
+
+
+function getMenuItems(req, res, next) {
+    r.table('menu').orderBy('name').run(req.app._rdbConn,        function(err, cursor) {
+
+        if(err) {
+            return next(err);
+        }
+
+        //Retrieve all the orders in an array.
+        cursor.toArray(function(err, result) {
+            if(err) {
+                return next(err);
+            }
+
+            res.json(result);
+        });
+    });
+}
+
 
 /*
  * Retrieve all todo items.
