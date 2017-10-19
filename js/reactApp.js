@@ -6,6 +6,7 @@ import appActions from './actions/appActions.js';
 // import AppDispatcher from './dispatcher.js';
 import ListStore from './stores/listStore.js';
 import $ from 'jquery';
+import async from 'babel-polyfill';
 
 // Load Stylesheets
 require('../less/main.less');
@@ -17,7 +18,10 @@ class App extends React.Component {
         // this.state = {
         //     order: props.items
         // }
-        this.state = {value: ''};
+        this.state = {
+            value: '',
+            menu: ''
+        };
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -39,9 +43,24 @@ class App extends React.Component {
     //     $.get('/menu');
     // }
 
-    // componentDidMount() {
-    //     ListStore.bind('change', this.listUpdated);
-    // }
+    componentDidMount() {
+        // ListStore.bind('change', this.listUpdated);
+
+        console.log(this.state);
+
+        $.get('/menu')
+            .then(async res => {
+                const data = await res;
+                console.log(data);
+                this.setState({
+                    menu: data
+                })
+            })
+            .catch(function(err) {
+                console.log(err.message);
+            });
+    }
+
     //
     // componentWillUnmount() {
     //     ListStore.unbind('change', this.listUpdated);
@@ -63,12 +82,15 @@ class App extends React.Component {
 
         let listItem = 'blah';
 
+        // let menuList = this.state.menu.map(function(item, i){
+        //     return <li key={i}>{item}</li>
+        // }.bind(this))
+
         return(
             <div>
                 <div className="addition-container">
                     <p>Hello Burrito!!</p>
                     <ul>
-                        <li>{menuArray}</li>
                     </ul>
                     <input onChange={this.handleChange} value={this.state.value}></input>
                     <button onClick={this.addItem}>Add To List</button>
