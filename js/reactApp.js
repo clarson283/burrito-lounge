@@ -20,7 +20,8 @@ class App extends React.Component {
         // }
         this.state = {
             value: '',
-            menu: ''
+            menu: [],
+            order: []
         };
         this.handleChange = this.handleChange.bind(this);
     }
@@ -29,14 +30,22 @@ class App extends React.Component {
         this.setState({value: event.target.value});
     }
 
-    addItem() {
+    placeOrder() {
         let url = '/orders',
-            data = { order: $('input').val() };
-
-        console.log(url);
-        console.log(data);
+            data = {
+                order: $('input').val(),
+                quantity: 1
+            };
 
         $.post(url, data);
+
+        this.setState = {(
+            order: data
+        )}
+    }
+
+    addItem() {
+
     }
 
     // const menuArray = function() {
@@ -46,15 +55,16 @@ class App extends React.Component {
     componentDidMount() {
         // ListStore.bind('change', this.listUpdated);
 
-        console.log(this.state);
-
         $.get('/menu')
             .then(async res => {
                 const data = await res;
-                console.log(data);
+
                 this.setState({
                     menu: data
-                })
+                });
+
+                console.log(this.state.menu);
+                console.log(typeof this.state.menu);
             })
             .catch(function(err) {
                 console.log(err.message);
@@ -73,19 +83,6 @@ class App extends React.Component {
     // }
 
     render() {
-
-        // let listAll = ListStore.getAll();
-        //
-        // let listItem = listAll.map( function(item) {
-        //     return <li key={item.id}>{item.name}</li>
-        // });
-
-        let listItem = 'blah';
-
-        // let menuList = this.state.menu.map(function(item, i){
-        //     return <li key={i}>{item}</li>
-        // }.bind(this))
-
         return(
             <div>
                 <div className="addition-container">
@@ -95,8 +92,11 @@ class App extends React.Component {
                     <input onChange={this.handleChange} value={this.state.value}></input>
                     <button onClick={this.addItem}>Add To List</button>
                     <ul>
-                        {listItem}
+                        {this.state.menu.map((item, key) => {
+                            return <li key={key} onClick={this.addItem}>{item.name}</li>
+                        })}
                     </ul>
+                    <button className="add-item" onClick={this.placeOrder}>Add To Order</button>
                 </div>
             </div>
         );

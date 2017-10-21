@@ -16347,6 +16347,8 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(73);
@@ -16407,7 +16409,7 @@ var App = function (_React$Component) {
 
         _this.state = {
             value: '',
-            menu: ''
+            menu: []
         };
         _this.handleChange = _this.handleChange.bind(_this);
         return _this;
@@ -16428,6 +16430,10 @@ var App = function (_React$Component) {
             console.log(data);
 
             _jquery2.default.post(url, data);
+
+            // this.setState = {(
+            //
+            // )}
         }
 
         // const menuArray = function() {
@@ -16440,8 +16446,6 @@ var App = function (_React$Component) {
             var _this2 = this;
 
             // ListStore.bind('change', this.listUpdated);
-
-            console.log(this.state);
 
             _jquery2.default.get('/menu').then(function () {
                 var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(res) {
@@ -16456,12 +16460,15 @@ var App = function (_React$Component) {
                                 case 2:
                                     data = _context.sent;
 
-                                    console.log(data);
+
                                     _this2.setState({
                                         menu: data
                                     });
 
-                                case 5:
+                                    console.log(_this2.state.menu);
+                                    console.log(_typeof(_this2.state.menu));
+
+                                case 6:
                                 case 'end':
                                     return _context.stop();
                             }
@@ -16491,19 +16498,6 @@ var App = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-
-            // let listAll = ListStore.getAll();
-            //
-            // let listItem = listAll.map( function(item) {
-            //     return <li key={item.id}>{item.name}</li>
-            // });
-
-            var listItem = 'blah';
-
-            // let menuList = this.state.menu.map(function(item, i){
-            //     return <li key={i}>{item}</li>
-            // }.bind(this))
-
             return _react2.default.createElement(
                 'div',
                 null,
@@ -16525,7 +16519,18 @@ var App = function (_React$Component) {
                     _react2.default.createElement(
                         'ul',
                         null,
-                        listItem
+                        this.state.menu.map(function (item, key) {
+                            return _react2.default.createElement(
+                                'li',
+                                { key: key },
+                                item.name
+                            );
+                        })
+                    ),
+                    _react2.default.createElement(
+                        'button',
+                        { className: 'add-item' },
+                        'Add To Order'
                     )
                 )
             );
@@ -42890,7 +42895,7 @@ exports = module.exports = __webpack_require__(525)(undefined);
 
 
 // module
-exports.push([module.i, "body {\n  background: #f3f3f3;\n}\nbody .addition-container {\n  background: white;\n  max-width: 600px;\n  margin: 1em auto;\n  padding: 1em;\n}\n", ""]);
+exports.push([module.i, "body {\n  background: #f3f3f3;\n}\nbody .addition-container {\n  background: white;\n  max-width: 600px;\n  margin: 3em auto 1em;\n  font-family: arial;\n  padding: 1em;\n}\nbody .addition-container ul {\n  list-style: none;\n  padding: 1em;\n}\nbody .addition-container ul li {\n  background: rgba(0, 188, 212, 0.99);\n  color: #f3f3f3;\n  cursor: pointer;\n  border-radius: 4px;\n  padding: 16px 20px;\n  margin: 10px;\n  width: 165px;\n}\nbody .addition-container ul li:hover {\n  background: rgba(0, 143, 161, 0.99);\n}\nbody .addition-container .add-item {\n  box-shadow: none;\n  border: none;\n  font-size: 16px;\n  text-transform: uppercase;\n  letter-spacing: 2px;\n  background: #768185;\n  color: #f3f3f3;\n  display: block;\n  margin: 10px auto;\n  width: 240px;\n  cursor: pointer;\n  border-radius: 4px;\n  padding: 16px 20px;\n}\nbody .addition-container .add-item:hover {\n  background: #5e676a;\n}\n", ""]);
 
 // exports
 
