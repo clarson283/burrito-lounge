@@ -5,8 +5,10 @@ import constants from './constants/appConstants.js';
 import appActions from './actions/appActions.js';
 // import AppDispatcher from './dispatcher.js';
 import ListStore from './stores/listStore.js';
-import $ from 'jquery';
+import axios from 'axios';
 import async from 'babel-polyfill';
+
+import MenuOptions from './components/MenuOptions.js';
 
 // Load Stylesheets
 require('../less/main.less');
@@ -15,20 +17,48 @@ class App extends React.Component {
 
     constructor(props) {
         super(props);
-        // this.state = {
-        //     order: props.items
-        // }
+
         this.state = {
-            value: '',
-            menu: [],
-            order: []
+            // value: '',
+            menu: []
+            // order: []
         };
-        this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange(event) {
-        this.setState({value: event.target.value});
+    componentWillMount() {
+
+        axios.get('/menu')
+            .then(res => {
+                let data = res;
+
+                console.log('premount settings');
+
+                this.setState({
+                    menu: data //res
+                });
+
+                // console.log(this.state.menu);
+                // console.log(typeof this.state.menu);
+            })
+            .catch(function(err) {
+                console.log('Fetching error: ', err.message);
+            });
+
+        // axios.get('/menu')
+        //     .then(response => response.json())
+        //     .then(json => json.map(item => item.name))
+        //     .then(menu =>
+        //         this.setState({menu})
+        //     )
     }
+
+    componentDidMount() {
+
+    }
+
+    // handleChange(event) {
+    //     this.setState({value: event.target.value});
+    // }
 
     placeOrder() {
         let url = '/orders',
@@ -39,37 +69,20 @@ class App extends React.Component {
 
         $.post(url, data);
 
-        this.setState = {(
+        this.setState({
             order: data
-        )}
+        });
     }
 
     addItem() {
 
     }
 
-    // const menuArray = function() {
-    //     $.get('/menu');
+    // componentDidMount() {
+    //     // ListStore.bind('change', this.listUpdated);
+    //
+    //     // console.log(this.state);
     // }
-
-    componentDidMount() {
-        // ListStore.bind('change', this.listUpdated);
-
-        $.get('/menu')
-            .then(async res => {
-                const data = await res;
-
-                this.setState({
-                    menu: data
-                });
-
-                console.log(this.state.menu);
-                console.log(typeof this.state.menu);
-            })
-            .catch(function(err) {
-                console.log(err.message);
-            });
-    }
 
     //
     // componentWillUnmount() {
@@ -83,25 +96,34 @@ class App extends React.Component {
     // }
 
     render() {
-        return(
+
+        let { menu } = this.state;
+
+        console.log(menu);
+        console.log(this.state);
+
+        return (menu.length) ?
             <div>
-                <div className="addition-container">
-                    <p>Hello Burrito!!</p>
+                <div className="order-container">
+                    <p>Order Stuff:</p>
                     <ul>
+                        {menu.data.map(
+                            (elem, index) => <li key={index}>{elem}</li>
+                        )}
                     </ul>
-                    <input onChange={this.handleChange} value={this.state.value}></input>
-                    <button onClick={this.addItem}>Add To List</button>
-                    <ul>
-                        {this.state.menu.map((item, key) => {
-                            return <li key={key} onClick={this.addItem}>{item.name}</li>
-                        })}
-                    </ul>
-                    <button className="add-item" onClick={this.placeOrder}>Add To Order</button>
                 </div>
-            </div>
-        );
+            </div> :
+            <div>No Menu</div>
     }
 }
+
+App.propTypes = {
+    menu: React.PropTypes.object
+}
+
+// App.setDefaultProps = {
+//     order: ['burrito']
+// }
 
 export default App;
 // ReactDOM.render(<App />, document.getElementById("root"));
