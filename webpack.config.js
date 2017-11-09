@@ -8,6 +8,7 @@ module.exports = {
     // },
     // entry: './js/app.js',
     entry: path.join(__dirname, 'js/root'),
+    watch: true,
     output: {
         path: path.join(__dirname, 'dest'),
         filename: 'app.bundle.js',

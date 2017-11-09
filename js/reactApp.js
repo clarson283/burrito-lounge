@@ -9,6 +9,7 @@ import axios from 'axios';
 import async from 'babel-polyfill';
 
 import MenuOptions from './components/MenuOptions.js';
+import OrderCalculator from './components/OrderCalculator.js'
 
 // Load Stylesheets
 require('../less/main.less');
@@ -29,27 +30,21 @@ class App extends React.Component {
 
         axios.get('/menu')
             .then(res => {
-                let data = res;
+                let data = res.data;
 
                 console.log('premount settings');
 
-                this.setState({
-                    menu: data //res
-                });
+                let tableArray = [];
 
-                // console.log(this.state.menu);
-                // console.log(typeof this.state.menu);
+                data.map(obj => tableArray.push([obj.name, obj.cost]));
+
+                this.setState({
+                    menu: [ tableArray ]
+                });
             })
             .catch(function(err) {
                 console.log('Fetching error: ', err.message);
             });
-
-        // axios.get('/menu')
-        //     .then(response => response.json())
-        //     .then(json => json.map(item => item.name))
-        //     .then(menu =>
-        //         this.setState({menu})
-        //     )
     }
 
     componentDidMount() {
@@ -74,9 +69,6 @@ class App extends React.Component {
         });
     }
 
-    addItem() {
-
-    }
 
     // componentDidMount() {
     //     // ListStore.bind('change', this.listUpdated);
@@ -100,30 +92,21 @@ class App extends React.Component {
         let { menu } = this.state;
 
         console.log(menu);
-        console.log(this.state);
+        // console.log(this.state);
 
         return (menu.length) ?
             <div>
-                <div className="order-container">
-                    <p>Order Stuff:</p>
-                    <ul>
-                        {menu.data.map(
-                            (elem, index) => <li key={index}>{elem}</li>
-                        )}
-                    </ul>
-                </div>
+                <MenuOptions menu={menu} />
+                <OrderCalculator/>
             </div> :
             <div>No Menu</div>
     }
 }
 
 App.propTypes = {
-    menu: React.PropTypes.object
+    menu: React.PropTypes.array
 }
 
-// App.setDefaultProps = {
-//     order: ['burrito']
-// }
 
 export default App;
 // ReactDOM.render(<App />, document.getElementById("root"));

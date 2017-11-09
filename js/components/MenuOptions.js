@@ -5,39 +5,37 @@ class MenuOptions extends Component {
 
     constructor(props) {
         super(props);
-        // this.state = {
-        //     order: props.items
-        // }
-        // this.state = {
-        //     value: '',
-        //     menu: [],
-        //     order: []
-        // };
 
-        // console.log(this.state);
         this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(event) {
-        this.setState({value: event.target.value});
+        // this.setState({value: event.target.value});
     }
 
     componentDidMount() {
         // ListStore.bind('change', this.listUpdated);
     }
 
+    addItem(event) {
+        console.log(event.target.innerHTML);
+    }
+
     render() {
+
+        const menu = this.props;
+
+        console.log(menu);
 
         return(
             <div>
                 <div className="addition-container">
                     <p>Hello Burrito!!</p>
-                    <input onChange={this.handleChange} value={this.state.value}></input>
                     <button onClick={this.addItem}>Add To List</button>
                     <ul>
-                        {this.props.menu.map((item, key) => {
-                            return <li key={key} onClick={this.addItem}>{item.name}</li>
-                        })}
+                        {menu.menu[0].map(
+                            (elem, index) => <li key={index} className={elem[0]} onClick={this.addItem}>{elem[0]}</li>
+                        )}
                     </ul>
                     <button className="add-item" onClick={this.placeOrder}>Add To Order</button>
                 </div>
@@ -47,7 +45,7 @@ class MenuOptions extends Component {
 }
 
 MenuOptions.propTypes = {
-    menu: PropTypes.string.isRequired
+    menu: PropTypes.array.isRequired
 }
 
 export default MenuOptions;

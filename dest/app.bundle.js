@@ -17256,6 +17256,10 @@ var _MenuOptions = __webpack_require__(551);
 
 var _MenuOptions2 = _interopRequireDefault(_MenuOptions);
 
+var _OrderCalculator = __webpack_require__(569);
+
+var _OrderCalculator2 = _interopRequireDefault(_OrderCalculator);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -17293,26 +17297,22 @@ var App = function (_React$Component) {
             var _this2 = this;
 
             _axios2.default.get('/menu').then(function (res) {
-                var data = res;
+                var data = res.data;
 
                 console.log('premount settings');
 
-                _this2.setState({
-                    menu: data //res
+                var tableArray = [];
+
+                data.map(function (obj) {
+                    return tableArray.push([obj.name, obj.cost]);
                 });
 
-                // console.log(this.state.menu);
-                // console.log(typeof this.state.menu);
+                _this2.setState({
+                    menu: [tableArray]
+                });
             }).catch(function (err) {
                 console.log('Fetching error: ', err.message);
             });
-
-            // axios.get('/menu')
-            //     .then(response => response.json())
-            //     .then(json => json.map(item => item.name))
-            //     .then(menu =>
-            //         this.setState({menu})
-            //     )
         }
     }, {
         key: 'componentDidMount',
@@ -17337,9 +17337,6 @@ var App = function (_React$Component) {
                 order: data
             });
         }
-    }, {
-        key: 'addItem',
-        value: function addItem() {}
 
         // componentDidMount() {
         //     // ListStore.bind('change', this.listUpdated);
@@ -17365,31 +17362,13 @@ var App = function (_React$Component) {
 
 
             console.log(menu);
-            console.log(this.state);
+            // console.log(this.state);
 
             return menu.length ? _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement(
-                    'div',
-                    { className: 'order-container' },
-                    _react2.default.createElement(
-                        'p',
-                        null,
-                        'Order Stuff:'
-                    ),
-                    _react2.default.createElement(
-                        'ul',
-                        null,
-                        menu.data.map(function (elem, index) {
-                            return _react2.default.createElement(
-                                'li',
-                                { key: index },
-                                elem
-                            );
-                        })
-                    )
-                )
+                _react2.default.createElement(_MenuOptions2.default, { menu: menu }),
+                _react2.default.createElement(_OrderCalculator2.default, null)
             ) : _react2.default.createElement(
                 'div',
                 null,
@@ -17402,12 +17381,8 @@ var App = function (_React$Component) {
 }(_react2.default.Component);
 
 App.propTypes = {
-    menu: _react2.default.PropTypes.object
+    menu: _react2.default.PropTypes.array
 };
-
-// App.setDefaultProps = {
-//     order: ['burrito']
-// }
 
 exports.default = App;
 // ReactDOM.render(<App />, document.getElementById("root"));
@@ -34389,16 +34364,6 @@ var MenuOptions = function (_Component) {
     function MenuOptions(props) {
         _classCallCheck(this, MenuOptions);
 
-        // this.state = {
-        //     order: props.items
-        // }
-        // this.state = {
-        //     value: '',
-        //     menu: [],
-        //     order: []
-        // };
-
-        // console.log(this.state);
         var _this = _possibleConstructorReturn(this, (MenuOptions.__proto__ || Object.getPrototypeOf(MenuOptions)).call(this, props));
 
         _this.handleChange = _this.handleChange.bind(_this);
@@ -34408,7 +34373,7 @@ var MenuOptions = function (_Component) {
     _createClass(MenuOptions, [{
         key: 'handleChange',
         value: function handleChange(event) {
-            this.setState({ value: event.target.value });
+            // this.setState({value: event.target.value});
         }
     }, {
         key: 'componentDidMount',
@@ -34416,9 +34381,18 @@ var MenuOptions = function (_Component) {
             // ListStore.bind('change', this.listUpdated);
         }
     }, {
+        key: 'addItem',
+        value: function addItem(event) {
+            console.log(event.target.innerHTML);
+        }
+    }, {
         key: 'render',
         value: function render() {
             var _this2 = this;
+
+            var menu = this.props;
+
+            console.log(menu);
 
             return _react2.default.createElement(
                 'div',
@@ -34431,7 +34405,6 @@ var MenuOptions = function (_Component) {
                         null,
                         'Hello Burrito!!'
                     ),
-                    _react2.default.createElement('input', { onChange: this.handleChange, value: this.state.value }),
                     _react2.default.createElement(
                         'button',
                         { onClick: this.addItem },
@@ -34440,11 +34413,11 @@ var MenuOptions = function (_Component) {
                     _react2.default.createElement(
                         'ul',
                         null,
-                        this.props.menu.map(function (item, key) {
+                        menu.menu[0].map(function (elem, index) {
                             return _react2.default.createElement(
                                 'li',
-                                { key: key, onClick: _this2.addItem },
-                                item.name
+                                { key: index, className: elem[0], onClick: _this2.addItem },
+                                elem[0]
                             );
                         })
                     ),
@@ -34462,7 +34435,7 @@ var MenuOptions = function (_Component) {
 }(_react.Component);
 
 MenuOptions.propTypes = {
-    menu: _propTypes2.default.string.isRequired
+    menu: _propTypes2.default.array.isRequired
 };
 
 exports.default = MenuOptions;
@@ -34607,7 +34580,7 @@ exports = module.exports = __webpack_require__(556)(undefined);
 
 
 // module
-exports.push([module.i, "body {\n  background: #f3f3f3;\n}\nbody .addition-container {\n  background: white;\n  max-width: 600px;\n  margin: 3em auto 1em;\n  font-family: arial;\n  padding: 1em;\n}\nbody .addition-container ul {\n  list-style: none;\n  padding: 1em;\n}\nbody .addition-container ul li {\n  background: rgba(0, 188, 212, 0.99);\n  color: #f3f3f3;\n  cursor: pointer;\n  border-radius: 4px;\n  padding: 16px 20px;\n  margin: 10px;\n  width: 165px;\n}\nbody .addition-container ul li:hover {\n  background: rgba(0, 143, 161, 0.99);\n}\nbody .addition-container .add-item {\n  box-shadow: none;\n  border: none;\n  font-size: 16px;\n  text-transform: uppercase;\n  letter-spacing: 2px;\n  background: #768185;\n  color: #f3f3f3;\n  display: block;\n  margin: 10px auto;\n  width: 240px;\n  cursor: pointer;\n  border-radius: 4px;\n  padding: 16px 20px;\n}\nbody .addition-container .add-item:hover {\n  background: #5e676a;\n}\n", ""]);
+exports.push([module.i, "body {\n  background: #f3f3f3;\n}\nbody .addition-container {\n  background: white;\n  max-width: 600px;\n  margin: 3em auto 1em;\n  font-family: arial;\n  padding: 1em;\n}\nbody .addition-container ul {\n  list-style: none;\n  padding: 1em;\n}\nbody .addition-container ul li {\n  background: rgba(0, 188, 212, 0.99);\n  letter-spacing: 1px;\n  color: #f3f3f3;\n  cursor: pointer;\n  border-radius: 4px;\n  padding: 16px 20px;\n  margin: 10px;\n  width: 185px;\n}\nbody .addition-container ul li:hover {\n  background: rgba(0, 143, 161, 0.99);\n}\nbody .addition-container .add-item {\n  box-shadow: none;\n  border: none;\n  font-size: 16px;\n  text-transform: uppercase;\n  letter-spacing: 2px;\n  background: #768185;\n  color: #f3f3f3;\n  display: block;\n  margin: 10px auto;\n  width: 240px;\n  cursor: pointer;\n  border-radius: 4px;\n  padding: 16px 20px;\n}\nbody .addition-container .add-item:hover {\n  background: #5e676a;\n}\nbody .order-container {\n  background: white;\n  max-width: 600px;\n  margin: 3em auto 1em;\n  font-family: arial;\n  padding: 1em;\n}\n", ""]);
 
 // exports
 
@@ -36239,6 +36212,68 @@ function abstractMethod(className, methodName) {
 
 module.exports = abstractMethod;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 569 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(67);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(552);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var OrderCalculator = function (_Component) {
+    _inherits(OrderCalculator, _Component);
+
+    function OrderCalculator() {
+        _classCallCheck(this, OrderCalculator);
+
+        return _possibleConstructorReturn(this, (OrderCalculator.__proto__ || Object.getPrototypeOf(OrderCalculator)).apply(this, arguments));
+    }
+
+    _createClass(OrderCalculator, [{
+        key: 'render',
+        value: function render() {
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    'div',
+                    { className: 'order-container' },
+                    _react2.default.createElement(
+                        'p',
+                        null,
+                        'Order Calculator'
+                    )
+                )
+            );
+        }
+    }]);
+
+    return OrderCalculator;
+}(_react.Component);
+
+exports.default = OrderCalculator;
 
 /***/ })
 /******/ ]);
