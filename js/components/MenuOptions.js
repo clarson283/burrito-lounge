@@ -19,6 +19,15 @@ class MenuOptions extends Component {
 
     addItem(event) {
         console.log(event.target.innerHTML);
+
+        const itemInfo = this.refs;
+
+        console.log(itemInfo);
+
+        let item = itemInfo.innerHTML;
+        this.props.addMenuItem(item);
+
+        console.log(item);
     }
 
     render() {
@@ -34,7 +43,7 @@ class MenuOptions extends Component {
                     <button onClick={this.addItem}>Add To List</button>
                     <ul>
                         {menu.menu[0].map(
-                            (elem, index) => <li key={index} className={elem[0]} onClick={this.addItem}>{elem[0]}</li>
+                            (elem, index) => <li key={index} className={elem[0]} ref="itemInfo" onClick={this.addItem.bind(this)}>{elem[0]}</li>
                         )}
                     </ul>
                     <button className="add-item" onClick={this.placeOrder}>Add To Order</button>

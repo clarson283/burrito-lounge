@@ -19,10 +19,12 @@ class App extends React.Component {
     constructor(props) {
         super(props);
 
+        this.handleItemAddition = this.handleItemAddition.bind(this);
+
         this.state = {
             // value: '',
-            menu: []
-            // order: []
+            menu: [],
+            order: []
         };
     }
 
@@ -69,6 +71,11 @@ class App extends React.Component {
         });
     }
 
+    handleItemAddition(itemValue) {
+        this.setState({
+            order: itemValue
+        });
+    }
 
     // componentDidMount() {
     //     // ListStore.bind('change', this.listUpdated);
@@ -96,7 +103,7 @@ class App extends React.Component {
 
         return (menu.length) ?
             <div>
-                <MenuOptions menu={menu} />
+                <MenuOptions menu={menu} addMenuItem={this.handleItemAddition} />
                 <OrderCalculator/>
             </div> :
             <div>No Menu</div>
