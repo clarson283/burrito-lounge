@@ -17,19 +17,6 @@ class MenuOptions extends Component {
         // ListStore.bind('change', this.listUpdated);
     }
 
-    addItem(event) {
-        console.log(event.target.innerHTML);
-
-        const itemInfo = this.refs;
-
-        console.log(itemInfo);
-
-        let item = itemInfo.innerHTML;
-        this.props.addMenuItem(item);
-
-        console.log(item);
-    }
-
     render() {
 
         const menu = this.props;
@@ -40,10 +27,9 @@ class MenuOptions extends Component {
             <div>
                 <div className="addition-container">
                     <p>Hello Burrito!!</p>
-                    <button onClick={this.addItem}>Add To List</button>
                     <ul>
                         {menu.menu[0].map(
-                            (elem, index) => <li key={index} className={elem[0]} ref="itemInfo" onClick={this.addItem.bind(this)}>{elem[0]}</li>
+                            (elem, index) => <li key={index} className={elem[0]} onClick={this.props.onItemClick(elem[0])}>{elem[0]}</li>
                         )}
                     </ul>
                     <button className="add-item" onClick={this.placeOrder}>Add To Order</button>
@@ -54,7 +40,12 @@ class MenuOptions extends Component {
 }
 
 MenuOptions.propTypes = {
-    menu: PropTypes.array.isRequired
+    menu: PropTypes.array.isRequired,
+    onItemClick: PropTypes.func
+}
+
+MenuOptions.defaultProps = {
+    onItemClick: f=>f
 }
 
 export default MenuOptions;

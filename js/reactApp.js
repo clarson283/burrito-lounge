@@ -19,13 +19,14 @@ class App extends React.Component {
     constructor(props) {
         super(props);
 
-        this.handleItemAddition = this.handleItemAddition.bind(this);
-
         this.state = {
             // value: '',
             menu: [],
             order: []
         };
+
+        // Reminder that it's always good to bind in the constructor
+        this.handleItemAddition = this.handleItemAddition.bind(this);
     }
 
     componentWillMount() {
@@ -57,6 +58,19 @@ class App extends React.Component {
     //     this.setState({value: event.target.value});
     // }
 
+    // addItem(event) {
+    //     console.log(event.target.innerHTML);
+    //
+    //     const itemInfo = this.refs;
+    //
+    //     console.log(itemInfo);
+    //
+    //     let item = itemInfo.innerHTML;
+    //     this.props.onItemClick(item);
+    //
+    //     console.log(item);
+    // }
+
     placeOrder() {
         let url = '/orders',
             data = {
@@ -71,9 +85,9 @@ class App extends React.Component {
         });
     }
 
-    handleItemAddition(itemValue) {
+    handleItemAddition(item) {
         this.setState({
-            order: itemValue
+            order: [...this.state.order, item.target.innerHTML]
         });
     }
 
@@ -96,22 +110,21 @@ class App extends React.Component {
 
     render() {
 
-        let { menu } = this.state;
-
-        console.log(menu);
-        // console.log(this.state);
+        let { menu, order } = this.state;
 
         return (menu.length) ?
             <div>
-                <MenuOptions menu={menu} addMenuItem={this.handleItemAddition} />
-                <OrderCalculator/>
+                <MenuOptions menu={menu} onItemClick={() => this.handleItemAddition} />
+                <OrderCalculator order={order} />
             </div> :
             <div>No Menu</div>
     }
 }
 
 App.propTypes = {
-    menu: React.PropTypes.array
+    menu: React.PropTypes.array,
+    order: React.PropTypes.array,
+    onItemClick: React.PropTypes.func
 }
 
 

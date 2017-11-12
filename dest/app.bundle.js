@@ -17297,6 +17297,8 @@ var _OrderCalculator2 = _interopRequireDefault(_OrderCalculator);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -17318,13 +17320,14 @@ var App = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-        _this.handleItemAddition = _this.handleItemAddition.bind(_this);
-
         _this.state = {
             // value: '',
             menu: [],
             order: []
         };
+
+        // Reminder that it's always good to bind in the constructor
+        _this.handleItemAddition = _this.handleItemAddition.bind(_this);
         return _this;
     }
 
@@ -17359,6 +17362,19 @@ var App = function (_React$Component) {
         //     this.setState({value: event.target.value});
         // }
 
+        // addItem(event) {
+        //     console.log(event.target.innerHTML);
+        //
+        //     const itemInfo = this.refs;
+        //
+        //     console.log(itemInfo);
+        //
+        //     let item = itemInfo.innerHTML;
+        //     this.props.onItemClick(item);
+        //
+        //     console.log(item);
+        // }
+
     }, {
         key: 'placeOrder',
         value: function placeOrder() {
@@ -17376,9 +17392,9 @@ var App = function (_React$Component) {
         }
     }, {
         key: 'handleItemAddition',
-        value: function handleItemAddition(itemValue) {
+        value: function handleItemAddition(item) {
             this.setState({
-                order: itemValue
+                order: [].concat(_toConsumableArray(this.state.order), [item.target.innerHTML])
             });
         }
 
@@ -17402,17 +17418,20 @@ var App = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            var menu = this.state.menu;
+            var _this3 = this;
 
+            var _state = this.state,
+                menu = _state.menu,
+                order = _state.order;
 
-            console.log(menu);
-            // console.log(this.state);
 
             return menu.length ? _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement(_MenuOptions2.default, { menu: menu, addMenuItem: this.handleItemAddition }),
-                _react2.default.createElement(_OrderCalculator2.default, null)
+                _react2.default.createElement(_MenuOptions2.default, { menu: menu, onItemClick: function onItemClick() {
+                        return _this3.handleItemAddition;
+                    } }),
+                _react2.default.createElement(_OrderCalculator2.default, { order: order })
             ) : _react2.default.createElement(
                 'div',
                 null,
@@ -17425,7 +17444,9 @@ var App = function (_React$Component) {
 }(_react2.default.Component);
 
 App.propTypes = {
-    menu: _react2.default.PropTypes.array
+    menu: _react2.default.PropTypes.array,
+    order: _react2.default.PropTypes.array,
+    onItemClick: _react2.default.PropTypes.func
 };
 
 exports.default = App;
@@ -34425,20 +34446,6 @@ var MenuOptions = function (_Component) {
             // ListStore.bind('change', this.listUpdated);
         }
     }, {
-        key: 'addItem',
-        value: function addItem(event) {
-            console.log(event.target.innerHTML);
-
-            var itemInfo = this.refs;
-
-            console.log(itemInfo);
-
-            var item = itemInfo.innerHTML;
-            this.props.addMenuItem(item);
-
-            console.log(item);
-        }
-    }, {
         key: 'render',
         value: function render() {
             var _this2 = this;
@@ -34459,17 +34466,12 @@ var MenuOptions = function (_Component) {
                         'Hello Burrito!!'
                     ),
                     _react2.default.createElement(
-                        'button',
-                        { onClick: this.addItem },
-                        'Add To List'
-                    ),
-                    _react2.default.createElement(
                         'ul',
                         null,
                         menu.menu[0].map(function (elem, index) {
                             return _react2.default.createElement(
                                 'li',
-                                { key: index, className: elem[0], ref: 'itemInfo', onClick: _this2.addItem.bind(_this2) },
+                                { key: index, className: elem[0], onClick: _this2.props.onItemClick(elem[0]) },
                                 elem[0]
                             );
                         })
@@ -34488,7 +34490,14 @@ var MenuOptions = function (_Component) {
 }(_react.Component);
 
 MenuOptions.propTypes = {
-    menu: _propTypes2.default.array.isRequired
+    menu: _propTypes2.default.array.isRequired,
+    onItemClick: _propTypes2.default.func
+};
+
+MenuOptions.defaultProps = {
+    onItemClick: function onItemClick(f) {
+        return f;
+    }
 };
 
 exports.default = MenuOptions;
@@ -34599,6 +34608,8 @@ var OrderCalculator = function (_Component) {
     _createClass(OrderCalculator, [{
         key: 'render',
         value: function render() {
+            var order = this.props;
+
             return _react2.default.createElement(
                 'div',
                 null,
@@ -34609,6 +34620,26 @@ var OrderCalculator = function (_Component) {
                         'p',
                         null,
                         'Order Calculator'
+                    ),
+                    _react2.default.createElement(
+                        'p',
+                        null,
+                        'Quantity:'
+                    ),
+                    _react2.default.createElement(
+                        'ul',
+                        null,
+                        order.order.length ? order.order.map(function (elem, index) {
+                            return _react2.default.createElement(
+                                'li',
+                                { key: index, className: elem },
+                                elem
+                            );
+                        }) : _react2.default.createElement(
+                            'li',
+                            null,
+                            'No Order Items'
+                        )
                     )
                 )
             );
@@ -34617,6 +34648,10 @@ var OrderCalculator = function (_Component) {
 
     return OrderCalculator;
 }(_react.Component);
+
+OrderCalculator.propTypes = {
+    order: _propTypes2.default.array.isRequired
+};
 
 exports.default = OrderCalculator;
 
@@ -34660,7 +34695,7 @@ exports = module.exports = __webpack_require__(557)(undefined);
 
 
 // module
-exports.push([module.i, "body {\n  background: #f3f3f3;\n}\nbody .addition-container {\n  background: white;\n  max-width: 600px;\n  margin: 3em auto 1em;\n  font-family: arial;\n  padding: 1em;\n}\nbody .addition-container ul {\n  list-style: none;\n  padding: 1em;\n}\nbody .addition-container ul li {\n  background: rgba(0, 188, 212, 0.99);\n  letter-spacing: 1px;\n  color: #f3f3f3;\n  cursor: pointer;\n  border-radius: 4px;\n  padding: 16px 20px;\n  margin: 10px;\n  width: 185px;\n}\nbody .addition-container ul li:hover {\n  background: rgba(0, 143, 161, 0.99);\n}\nbody .addition-container .add-item {\n  box-shadow: none;\n  border: none;\n  font-size: 16px;\n  text-transform: uppercase;\n  letter-spacing: 2px;\n  background: #768185;\n  color: #f3f3f3;\n  display: block;\n  margin: 10px auto;\n  width: 240px;\n  cursor: pointer;\n  border-radius: 4px;\n  padding: 16px 20px;\n}\nbody .addition-container .add-item:hover {\n  background: #5e676a;\n}\nbody .order-container {\n  background: white;\n  max-width: 600px;\n  margin: 3em auto 1em;\n  font-family: arial;\n  padding: 1em;\n}\n", ""]);
+exports.push([module.i, "body {\n  background: #f3f3f3;\n}\nbody .addition-container {\n  background: white;\n  max-width: 600px;\n  margin: 3em auto 1em;\n  font-family: arial;\n  padding: 1em;\n}\nbody .addition-container ul {\n  list-style: none;\n  padding: 1em;\n}\nbody .addition-container ul li {\n  background: rgba(0, 188, 212, 0.99);\n  letter-spacing: 1px;\n  color: #f3f3f3;\n  cursor: pointer;\n  border-radius: 4px;\n  padding: 16px 20px;\n  margin: 10px;\n  width: 185px;\n}\nbody .addition-container ul li:hover {\n  background: rgba(0, 143, 161, 0.99);\n}\nbody .addition-container .add-item {\n  box-shadow: none;\n  border: none;\n  font-size: 16px;\n  text-transform: uppercase;\n  letter-spacing: 2px;\n  background: #768185;\n  color: #f3f3f3;\n  display: block;\n  margin: 10px auto;\n  width: 240px;\n  cursor: pointer;\n  border-radius: 4px;\n  padding: 16px 20px;\n}\nbody .addition-container .add-item:hover {\n  background: #5e676a;\n}\nbody .order-container {\n  background: white;\n  max-width: 600px;\n  margin: 3em auto 1em;\n  font-family: arial;\n  padding: 1em;\n}\nbody .order-container ul {\n  list-style: none;\n  padding-left: 0;\n}\nbody .order-container ul li {\n  padding: 1em;\n  border-bottom: 1px solid #e1e1e1;\n}\n", ""]);
 
 // exports
 
