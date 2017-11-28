@@ -33,16 +33,19 @@ class App extends React.Component {
 
         axios.get('/menu')
             .then(res => {
-                let data = res.data;
+                let data = res.data,
+                    tableArray = [];
 
-                console.log('premount settings');
-
-                let tableArray = [];
-
-                data.map(obj => tableArray.push([obj.name, obj.cost]));
+                data.map(obj => tableArray.push(
+                    // [obj.name, obj.cost]
+                    {
+                        "name": obj.name,
+                        "cost": obj.cost
+                    }
+                ));
 
                 this.setState({
-                    menu: [ tableArray ]
+                    menu: tableArray
                 });
             })
             .catch(function(err) {
@@ -86,9 +89,22 @@ class App extends React.Component {
     }
 
     handleItemAddition(item) {
-        this.setState({
-            order: [...this.state.order, item.target.innerHTML]
-        });
+        console.log(item);
+
+        const order = [
+            ...this.state.order,
+            {
+                name: item.target.innerHTML//,
+                // addons: ,
+                // cost:
+            }
+        ]
+
+        this.setState({order});
+
+        // isChecked = true;
+        //
+        // console.log(isChecked);
     }
 
     // componentDidMount() {

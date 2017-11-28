@@ -17337,18 +17337,20 @@ var App = function (_React$Component) {
             var _this2 = this;
 
             _axios2.default.get('/menu').then(function (res) {
-                var data = res.data;
-
-                console.log('premount settings');
-
-                var tableArray = [];
+                var data = res.data,
+                    tableArray = [];
 
                 data.map(function (obj) {
-                    return tableArray.push([obj.name, obj.cost]);
+                    return tableArray.push(
+                    // [obj.name, obj.cost]
+                    {
+                        "name": obj.name,
+                        "cost": obj.cost
+                    });
                 });
 
                 _this2.setState({
-                    menu: [tableArray]
+                    menu: tableArray
                 });
             }).catch(function (err) {
                 console.log('Fetching error: ', err.message);
@@ -17393,9 +17395,19 @@ var App = function (_React$Component) {
     }, {
         key: 'handleItemAddition',
         value: function handleItemAddition(item) {
-            this.setState({
-                order: [].concat(_toConsumableArray(this.state.order), [item.target.innerHTML])
-            });
+            console.log(item);
+
+            var order = [].concat(_toConsumableArray(this.state.order), [{
+                name: item.target.innerHTML //,
+                // addons: ,
+                // cost:
+            }]);
+
+            this.setState({ order: order });
+
+            // isChecked = true;
+            //
+            // console.log(isChecked);
         }
 
         // componentDidMount() {
@@ -34452,6 +34464,8 @@ var MenuOptions = function (_Component) {
 
             var menu = this.props;
 
+            // console.log(isChecked);
+
             console.log(menu);
 
             return _react2.default.createElement(
@@ -34468,11 +34482,11 @@ var MenuOptions = function (_Component) {
                     _react2.default.createElement(
                         'ul',
                         null,
-                        menu.menu[0].map(function (elem, index) {
+                        menu.menu.map(function (elem, index) {
                             return _react2.default.createElement(
                                 'li',
-                                { key: index, className: elem[0], onClick: _this2.props.onItemClick(elem[0]) },
-                                elem[0]
+                                { key: index, className: elem.name, onClick: _this2.props.onItemClick({ elem: elem }) },
+                                elem.name
                             );
                         })
                     ),
@@ -34596,6 +34610,10 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+// const OrderItem = ({name, addons, cost}) => {
+//     <li>{name}</li>
+// }
+
 var OrderCalculator = function (_Component) {
     _inherits(OrderCalculator, _Component);
 
@@ -34632,8 +34650,8 @@ var OrderCalculator = function (_Component) {
                         order.order.length ? order.order.map(function (elem, index) {
                             return _react2.default.createElement(
                                 'li',
-                                { key: index, className: elem },
-                                elem
+                                { key: index, className: elem.name },
+                                elem.name
                             );
                         }) : _react2.default.createElement(
                             'li',
@@ -34695,7 +34713,7 @@ exports = module.exports = __webpack_require__(557)(undefined);
 
 
 // module
-exports.push([module.i, "body {\n  background: #f3f3f3;\n}\nbody .addition-container {\n  background: white;\n  max-width: 600px;\n  margin: 3em auto 1em;\n  font-family: arial;\n  padding: 1em;\n}\nbody .addition-container ul {\n  list-style: none;\n  padding: 1em;\n}\nbody .addition-container ul li {\n  background: rgba(0, 188, 212, 0.99);\n  letter-spacing: 1px;\n  color: #f3f3f3;\n  cursor: pointer;\n  border-radius: 4px;\n  padding: 16px 20px;\n  margin: 10px;\n  width: 185px;\n}\nbody .addition-container ul li:hover {\n  background: rgba(0, 143, 161, 0.99);\n}\nbody .addition-container .add-item {\n  box-shadow: none;\n  border: none;\n  font-size: 16px;\n  text-transform: uppercase;\n  letter-spacing: 2px;\n  background: #768185;\n  color: #f3f3f3;\n  display: block;\n  margin: 10px auto;\n  width: 240px;\n  cursor: pointer;\n  border-radius: 4px;\n  padding: 16px 20px;\n}\nbody .addition-container .add-item:hover {\n  background: #5e676a;\n}\nbody .order-container {\n  background: white;\n  max-width: 600px;\n  margin: 3em auto 1em;\n  font-family: arial;\n  padding: 1em;\n}\nbody .order-container ul {\n  list-style: none;\n  padding-left: 0;\n}\nbody .order-container ul li {\n  padding: 1em;\n  border-bottom: 1px solid #e1e1e1;\n}\n", ""]);
+exports.push([module.i, "body {\n  background: #f3f3f3;\n}\nbody .addition-container {\n  background: white;\n  max-width: 600px;\n  font-family: arial;\n  padding: 1em;\n  width: 40%;\n  float: left;\n}\nbody .addition-container ul {\n  list-style: none;\n  padding: 1em;\n}\nbody .addition-container ul li {\n  background: rgba(0, 188, 212, 0.99);\n  letter-spacing: 1px;\n  color: #f3f3f3;\n  cursor: pointer;\n  border-radius: 4px;\n  padding: 16px 20px;\n  margin: 10px;\n  width: 185px;\n}\nbody .addition-container ul li:hover {\n  background: rgba(0, 143, 161, 0.99);\n}\nbody .addition-container .add-item {\n  box-shadow: none;\n  border: none;\n  font-size: 16px;\n  text-transform: uppercase;\n  letter-spacing: 2px;\n  background: #768185;\n  color: #f3f3f3;\n  display: block;\n  margin: 10px auto;\n  width: 240px;\n  cursor: pointer;\n  border-radius: 4px;\n  padding: 16px 20px;\n}\nbody .addition-container .add-item:hover {\n  background: #5e676a;\n}\nbody .order-container {\n  background: white;\n  max-width: 600px;\n  font-family: arial;\n  padding: 1em;\n  width: 40%;\n  float: left;\n}\nbody .order-container ul {\n  list-style: none;\n  padding-left: 0;\n}\nbody .order-container ul li {\n  padding: 1em;\n  border-bottom: 1px solid #e1e1e1;\n}\n", ""]);
 
 // exports
 
