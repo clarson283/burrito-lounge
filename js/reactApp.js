@@ -37,8 +37,8 @@ class App extends React.Component {
                     tableArray = [];
 
                 data.map(obj => tableArray.push(
-                    // [obj.name, obj.cost]
                     {
+                        "id": obj.id,
                         "name": obj.name,
                         "cost": obj.cost
                     }
@@ -97,6 +97,8 @@ class App extends React.Component {
                 name: item.target.innerHTML//,
                 // addons: ,
                 // cost:
+                // name: item.name,
+                // cost: item.cost
             }
         ]
 
@@ -131,7 +133,7 @@ class App extends React.Component {
         return (menu.length) ?
             <div>
                 <MenuOptions menu={menu} onItemClick={() => this.handleItemAddition} />
-                <OrderCalculator order={order} />
+                <OrderCalculator order={order} menu={menu} />
             </div> :
             <div>No Menu</div>
     }

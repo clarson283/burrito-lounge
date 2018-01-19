@@ -31,7 +31,7 @@ class MenuOptions extends Component {
                     <p>Hello Burrito!!</p>
                     <ul>
                         {menu.menu.map(
-                            (elem, index) => <li key={index} className={elem.name}  onClick={this.props.onItemClick({elem})}>{elem.name}</li>
+                            (elem, index) => <li key={index} className={elem.name}  onClick={this.props.onItemClick(elem.id)}>{elem.name}</li>
                         )}
                     </ul>
                     <button className="add-item" onClick={this.placeOrder}>Add To Order</button>

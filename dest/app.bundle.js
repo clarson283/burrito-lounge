@@ -17341,9 +17341,8 @@ var App = function (_React$Component) {
                     tableArray = [];
 
                 data.map(function (obj) {
-                    return tableArray.push(
-                    // [obj.name, obj.cost]
-                    {
+                    return tableArray.push({
+                        "id": obj.id,
                         "name": obj.name,
                         "cost": obj.cost
                     });
@@ -17401,6 +17400,8 @@ var App = function (_React$Component) {
                 name: item.target.innerHTML //,
                 // addons: ,
                 // cost:
+                // name: item.name,
+                // cost: item.cost
             }]);
 
             this.setState({ order: order });
@@ -17443,7 +17444,7 @@ var App = function (_React$Component) {
                 _react2.default.createElement(_MenuOptions2.default, { menu: menu, onItemClick: function onItemClick() {
                         return _this3.handleItemAddition;
                     } }),
-                _react2.default.createElement(_OrderCalculator2.default, { order: order })
+                _react2.default.createElement(_OrderCalculator2.default, { order: order, menu: menu })
             ) : _react2.default.createElement(
                 'div',
                 null,
@@ -34485,7 +34486,7 @@ var MenuOptions = function (_Component) {
                         menu.menu.map(function (elem, index) {
                             return _react2.default.createElement(
                                 'li',
-                                { key: index, className: elem.name, onClick: _this2.props.onItemClick({ elem: elem }) },
+                                { key: index, className: elem.name, onClick: _this2.props.onItemClick(elem.id) },
                                 elem.name
                             );
                         })
