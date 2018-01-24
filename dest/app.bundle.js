@@ -17297,8 +17297,6 @@ var _OrderCalculator2 = _interopRequireDefault(_OrderCalculator);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -17327,7 +17325,7 @@ var App = function (_React$Component) {
         };
 
         // Reminder that it's always good to bind in the constructor
-        _this.handleItemAddition = _this.handleItemAddition.bind(_this);
+        // this.handleItemAddition = this.handleItemAddition.bind(this);
         return _this;
     }
 
@@ -17391,25 +17389,28 @@ var App = function (_React$Component) {
                 order: data
             });
         }
-    }, {
-        key: 'handleItemAddition',
-        value: function handleItemAddition(item) {
-            console.log(item);
 
-            var order = [].concat(_toConsumableArray(this.state.order), [{
-                name: item.target.innerHTML //,
-                // addons: ,
-                // cost:
-                // name: item.name,
-                // cost: item.cost
-            }]);
-
-            this.setState({ order: order });
-
-            // isChecked = true;
-            //
-            // console.log(isChecked);
-        }
+        // handleItemAddition(index, item) {
+        //     console.log(item);
+        //     console.log(index);
+        //
+        //     const order = [
+        //         ...this.state.order,
+        //         {
+        //             name: item.target.innerHTML//,
+        //             // addons: ,
+        //             // cost:
+        //             // name: item.name,
+        //             // cost: item.cost
+        //         }
+        //     ]
+        //
+        //     this.setState({order});
+        //
+        //     // isChecked = true;
+        //     //
+        //     // console.log(isChecked);
+        // }
 
         // componentDidMount() {
         //     // ListStore.bind('change', this.listUpdated);
@@ -17431,19 +17432,15 @@ var App = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            var _this3 = this;
-
             var _state = this.state,
                 menu = _state.menu,
                 order = _state.order;
-
+            // let { checked } = this.props;
 
             return menu.length ? _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement(_MenuOptions2.default, { menu: menu, onItemClick: function onItemClick() {
-                        return _this3.handleItemAddition;
-                    } }),
+                _react2.default.createElement(_MenuOptions2.default, { menu: menu, orderState: this.state.order }),
                 _react2.default.createElement(_OrderCalculator2.default, { order: order, menu: menu })
             ) : _react2.default.createElement(
                 'div',
@@ -17459,6 +17456,7 @@ var App = function (_React$Component) {
 App.propTypes = {
     menu: _react2.default.PropTypes.array,
     order: _react2.default.PropTypes.array,
+    // checked: React.PropTypes.boolean,
     onItemClick: _react2.default.PropTypes.func
 };
 
@@ -34430,6 +34428,8 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -34445,6 +34445,7 @@ var MenuOptions = function (_Component) {
         var _this = _possibleConstructorReturn(this, (MenuOptions.__proto__ || Object.getPrototypeOf(MenuOptions)).call(this, props));
 
         _this.handleChange = _this.handleChange.bind(_this);
+        _this.handleItemAddition = _this.handleItemAddition.bind(_this);
         return _this;
     }
 
@@ -34457,6 +34458,26 @@ var MenuOptions = function (_Component) {
         key: 'componentDidMount',
         value: function componentDidMount() {
             // ListStore.bind('change', this.listUpdated);
+        }
+    }, {
+        key: 'handleItemAddition',
+        value: function handleItemAddition(index, item) {
+            console.log(index);
+            console.log(item);
+
+            var order = [].concat(_toConsumableArray(this.state.order), [{
+                name: item.target.innerHTML //,
+                // addons: ,
+                // cost:
+                // name: item.name,
+                // cost: item.cost
+            }]);
+
+            this.setState({ order: order });
+
+            // isChecked = true;
+            //
+            // console.log(isChecked);
         }
     }, {
         key: 'render',
@@ -34486,10 +34507,14 @@ var MenuOptions = function (_Component) {
                         menu.menu.map(function (elem, index) {
                             return _react2.default.createElement(
                                 'li',
-                                { key: index, className: elem.name, onClick: _this2.props.onItemClick(elem.id) },
+                                { key: index, className: elem.name, onClick: function onClick() {
+                                        return _this2.handleItemAddition(index, elem);
+                                    } },
                                 elem.name
                             );
-                        })
+                        }
+                        // (elem, index) => <li key={index} className={elem.name}  onClick={this.props.onItemClick(elem.id)}>{elem.name}</li>
+                        )
                     ),
                     _react2.default.createElement(
                         'button',
@@ -34714,7 +34739,7 @@ exports = module.exports = __webpack_require__(557)(undefined);
 
 
 // module
-exports.push([module.i, "body {\n  background: #f3f3f3;\n}\nbody .addition-container {\n  background: white;\n  max-width: 600px;\n  font-family: arial;\n  padding: 1em;\n  width: 40%;\n  float: left;\n}\nbody .addition-container ul {\n  list-style: none;\n  padding: 1em;\n}\nbody .addition-container ul li {\n  background: rgba(0, 188, 212, 0.99);\n  letter-spacing: 1px;\n  color: #f3f3f3;\n  cursor: pointer;\n  border-radius: 4px;\n  padding: 16px 20px;\n  margin: 10px;\n  width: 185px;\n}\nbody .addition-container ul li:hover {\n  background: rgba(0, 143, 161, 0.99);\n}\nbody .addition-container .add-item {\n  box-shadow: none;\n  border: none;\n  font-size: 16px;\n  text-transform: uppercase;\n  letter-spacing: 2px;\n  background: #768185;\n  color: #f3f3f3;\n  display: block;\n  margin: 10px auto;\n  width: 240px;\n  cursor: pointer;\n  border-radius: 4px;\n  padding: 16px 20px;\n}\nbody .addition-container .add-item:hover {\n  background: #5e676a;\n}\nbody .order-container {\n  background: white;\n  max-width: 600px;\n  font-family: arial;\n  padding: 1em;\n  width: 40%;\n  float: left;\n}\nbody .order-container ul {\n  list-style: none;\n  padding-left: 0;\n}\nbody .order-container ul li {\n  padding: 1em;\n  border-bottom: 1px solid #e1e1e1;\n}\n", ""]);
+exports.push([module.i, "body {\n  background: #f3f3f3;\n}\nbody .addition-container {\n  background: white;\n  max-width: 600px;\n  font-family: arial;\n  padding: 1em;\n  margin: 1em auto;\n}\nbody .addition-container ul {\n  list-style: none;\n  padding: 1em;\n  margin: auto;\n}\nbody .addition-container ul:after {\n  content: '';\n  display: table;\n  clear: both;\n}\nbody .addition-container ul li {\n  background: rgba(0, 188, 212, 0.99);\n  letter-spacing: 1px;\n  color: #f3f3f3;\n  text-align: center;\n  cursor: pointer;\n  border-radius: 4px;\n  padding: 16px 0;\n  margin: 2%;\n  width: 46%;\n  float: left;\n}\nbody .addition-container ul li:hover {\n  background: rgba(0, 143, 161, 0.99);\n}\nbody .addition-container .add-item {\n  box-shadow: none;\n  border: none;\n  font-size: 16px;\n  text-transform: uppercase;\n  letter-spacing: 2px;\n  background: #768185;\n  color: #f3f3f3;\n  display: block;\n  margin: 10px auto;\n  width: 240px;\n  cursor: pointer;\n  border-radius: 4px;\n  padding: 16px 20px;\n}\nbody .addition-container .add-item:hover {\n  background: #5e676a;\n}\nbody .order-container {\n  background: white;\n  max-width: 600px;\n  font-family: arial;\n  padding: 1em;\n  margin: 0 auto;\n}\nbody .order-container ul {\n  list-style: none;\n  padding-left: 0;\n}\nbody .order-container ul li {\n  padding: 1em;\n  border-bottom: 1px solid #e1e1e1;\n}\n", ""]);
 
 // exports
 

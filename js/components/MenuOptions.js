@@ -7,6 +7,7 @@ class MenuOptions extends Component {
         super(props);
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleItemAddition = this.handleItemAddition.bind(this);
     }
 
     handleChange(event) {
@@ -15,6 +16,28 @@ class MenuOptions extends Component {
 
     componentDidMount() {
         // ListStore.bind('change', this.listUpdated);
+    }
+
+    handleItemAddition(index, item) {
+        console.log(index);
+        console.log(item);
+
+        const order = [
+            ...this.state.order,
+            {
+                name: item.target.innerHTML//,
+                // addons: ,
+                // cost:
+                // name: item.name,
+                // cost: item.cost
+            }
+        ]
+
+        this.setState({order});
+
+        // isChecked = true;
+        //
+        // console.log(isChecked);
     }
 
     render() {
@@ -31,7 +54,8 @@ class MenuOptions extends Component {
                     <p>Hello Burrito!!</p>
                     <ul>
                         {menu.menu.map(
-                            (elem, index) => <li key={index} className={elem.name}  onClick={this.props.onItemClick(elem.id)}>{elem.name}</li>
+                            (elem, index) => <li key={index} className={elem.name}  onClick={() => this.handleItemAddition(index, elem)}>{elem.name}</li>
+                            // (elem, index) => <li key={index} className={elem.name}  onClick={this.props.onItemClick(elem.id)}>{elem.name}</li>
                         )}
                     </ul>
                     <button className="add-item" onClick={this.placeOrder}>Add To Order</button>

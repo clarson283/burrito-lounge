@@ -7,22 +7,32 @@ body {
         // margin: 3em auto 1em;
         font-family: arial;
         padding: 1em;
-        width: 40%;
-        float: left;
+        margin: 1em auto;;
+        // width: 40%;
+        // float: left;
 
         ul {
             list-style: none;
             padding: 1em;
+            margin: auto;
+
+            &:after {
+                content: '';
+                display: table;
+                clear: both;
+            }
 
             li {
                 background: rgba(0, 188, 212, 0.99);
                 letter-spacing: 1px;
                 color: #f3f3f3;
+                text-align: center;
                 cursor: pointer;
                 border-radius: 4px;
-                padding: 16px 20px;
-                margin: 10px;
-                width: 185px;
+                padding: 16px 0;
+                margin: 2%;
+                width: 46%;//185px;
+                float: left;
 
                 &:hover {
                     background: darken(rgba(0, 188, 212, 0.99), 10%);
@@ -56,8 +66,9 @@ body {
         // margin: 3em auto 1em;
         font-family: arial;
         padding: 1em;
-        width: 40%;
-        float: left;
+        margin: 0 auto;;
+        // width: 40%;
+        // float: left;
 
         ul {
             list-style: none;

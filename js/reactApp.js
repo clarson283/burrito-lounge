@@ -26,7 +26,7 @@ class App extends React.Component {
         };
 
         // Reminder that it's always good to bind in the constructor
-        this.handleItemAddition = this.handleItemAddition.bind(this);
+        // this.handleItemAddition = this.handleItemAddition.bind(this);
     }
 
     componentWillMount() {
@@ -88,26 +88,27 @@ class App extends React.Component {
         });
     }
 
-    handleItemAddition(item) {
-        console.log(item);
-
-        const order = [
-            ...this.state.order,
-            {
-                name: item.target.innerHTML//,
-                // addons: ,
-                // cost:
-                // name: item.name,
-                // cost: item.cost
-            }
-        ]
-
-        this.setState({order});
-
-        // isChecked = true;
-        //
-        // console.log(isChecked);
-    }
+    // handleItemAddition(index, item) {
+    //     console.log(item);
+    //     console.log(index);
+    //
+    //     const order = [
+    //         ...this.state.order,
+    //         {
+    //             name: item.target.innerHTML//,
+    //             // addons: ,
+    //             // cost:
+    //             // name: item.name,
+    //             // cost: item.cost
+    //         }
+    //     ]
+    //
+    //     this.setState({order});
+    //
+    //     // isChecked = true;
+    //     //
+    //     // console.log(isChecked);
+    // }
 
     // componentDidMount() {
     //     // ListStore.bind('change', this.listUpdated);
@@ -129,10 +130,11 @@ class App extends React.Component {
     render() {
 
         let { menu, order } = this.state;
+        // let { checked } = this.props;
 
         return (menu.length) ?
             <div>
-                <MenuOptions menu={menu} onItemClick={() => this.handleItemAddition} />
+                <MenuOptions menu={menu} orderState={this.state.order} />
                 <OrderCalculator order={order} menu={menu} />
             </div> :
             <div>No Menu</div>
@@ -142,6 +144,7 @@ class App extends React.Component {
 App.propTypes = {
     menu: React.PropTypes.array,
     order: React.PropTypes.array,
+    // checked: React.PropTypes.boolean,
     onItemClick: React.PropTypes.func
 }
 
