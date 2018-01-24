@@ -17287,15 +17287,17 @@ var _babelPolyfill = __webpack_require__(350);
 
 var _babelPolyfill2 = _interopRequireDefault(_babelPolyfill);
 
-var _MenuOptions = __webpack_require__(552);
+var _MenuOption = __webpack_require__(570);
 
-var _MenuOptions2 = _interopRequireDefault(_MenuOptions);
+var _MenuOption2 = _interopRequireDefault(_MenuOption);
 
 var _OrderCalculator = __webpack_require__(554);
 
 var _OrderCalculator2 = _interopRequireDefault(_OrderCalculator);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -17325,7 +17327,7 @@ var App = function (_React$Component) {
         };
 
         // Reminder that it's always good to bind in the constructor
-        // this.handleItemAddition = this.handleItemAddition.bind(this);
+        _this.handleItemAddition = _this.handleItemAddition.bind(_this);
         return _this;
     }
 
@@ -17389,28 +17391,28 @@ var App = function (_React$Component) {
                 order: data
             });
         }
+    }, {
+        key: 'handleItemAddition',
+        value: function handleItemAddition(event) {
+            // console.log(item);
+            // console.log(index);
 
-        // handleItemAddition(index, item) {
-        //     console.log(item);
-        //     console.log(index);
-        //
-        //     const order = [
-        //         ...this.state.order,
-        //         {
-        //             name: item.target.innerHTML//,
-        //             // addons: ,
-        //             // cost:
-        //             // name: item.name,
-        //             // cost: item.cost
-        //         }
-        //     ]
-        //
-        //     this.setState({order});
-        //
-        //     // isChecked = true;
-        //     //
-        //     // console.log(isChecked);
-        // }
+            console.log(event);
+
+            var order = [].concat(_toConsumableArray(this.state.order), [{
+                name: event.target.innerHTML //,
+                // addons: ,
+                // cost:
+                // name: item.name,
+                // cost: item.cost
+            }]);
+
+            this.setState({ order: order });
+
+            // isChecked = true;
+            //
+            // console.log(isChecked);
+        }
 
         // componentDidMount() {
         //     // ListStore.bind('change', this.listUpdated);
@@ -17432,15 +17434,23 @@ var App = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+            var _this3 = this;
+
             var _state = this.state,
                 menu = _state.menu,
                 order = _state.order;
             // let { checked } = this.props;
 
+            console.log(menu);
+
             return menu.length ? _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement(_MenuOptions2.default, { menu: menu, orderState: this.state.order }),
+                menu.map(function (elem, key) {
+                    return _react2.default.createElement(_MenuOption2.default, { name: elem.name, key: key, onItemClick: function onItemClick() {
+                            return _this3.handleItemAddition;
+                        } });
+                }),
                 _react2.default.createElement(_OrderCalculator2.default, { order: order, menu: menu })
             ) : _react2.default.createElement(
                 'div',
@@ -34406,143 +34416,7 @@ module.exports = function (regExp, replace) {
 
 
 /***/ }),
-/* 552 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(59);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = __webpack_require__(221);
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var MenuOptions = function (_Component) {
-    _inherits(MenuOptions, _Component);
-
-    function MenuOptions(props) {
-        _classCallCheck(this, MenuOptions);
-
-        var _this = _possibleConstructorReturn(this, (MenuOptions.__proto__ || Object.getPrototypeOf(MenuOptions)).call(this, props));
-
-        _this.handleChange = _this.handleChange.bind(_this);
-        _this.handleItemAddition = _this.handleItemAddition.bind(_this);
-        return _this;
-    }
-
-    _createClass(MenuOptions, [{
-        key: 'handleChange',
-        value: function handleChange(event) {
-            // this.setState({value: event.target.value});
-        }
-    }, {
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            // ListStore.bind('change', this.listUpdated);
-        }
-    }, {
-        key: 'handleItemAddition',
-        value: function handleItemAddition(index, item) {
-            console.log(index);
-            console.log(item);
-
-            var order = [].concat(_toConsumableArray(this.state.order), [{
-                name: item.target.innerHTML //,
-                // addons: ,
-                // cost:
-                // name: item.name,
-                // cost: item.cost
-            }]);
-
-            this.setState({ order: order });
-
-            // isChecked = true;
-            //
-            // console.log(isChecked);
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            var _this2 = this;
-
-            var menu = this.props;
-
-            // console.log(isChecked);
-
-            console.log(menu);
-
-            return _react2.default.createElement(
-                'div',
-                null,
-                _react2.default.createElement(
-                    'div',
-                    { className: 'addition-container' },
-                    _react2.default.createElement(
-                        'p',
-                        null,
-                        'Hello Burrito!!'
-                    ),
-                    _react2.default.createElement(
-                        'ul',
-                        null,
-                        menu.menu.map(function (elem, index) {
-                            return _react2.default.createElement(
-                                'li',
-                                { key: index, className: elem.name, onClick: function onClick() {
-                                        return _this2.handleItemAddition(index, elem);
-                                    } },
-                                elem.name
-                            );
-                        }
-                        // (elem, index) => <li key={index} className={elem.name}  onClick={this.props.onItemClick(elem.id)}>{elem.name}</li>
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'button',
-                        { className: 'add-item', onClick: this.placeOrder },
-                        'Add To Order'
-                    )
-                )
-            );
-        }
-    }]);
-
-    return MenuOptions;
-}(_react.Component);
-
-MenuOptions.propTypes = {
-    menu: _propTypes2.default.array.isRequired,
-    onItemClick: _propTypes2.default.func
-};
-
-MenuOptions.defaultProps = {
-    onItemClick: function onItemClick(f) {
-        return f;
-    }
-};
-
-exports.default = MenuOptions;
-
-/***/ }),
+/* 552 */,
 /* 553 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -36371,6 +36245,112 @@ function abstractMethod(className, methodName) {
 
 module.exports = abstractMethod;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+/* 570 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(59);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(221);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var MenuOption = function (_Component) {
+    _inherits(MenuOption, _Component);
+
+    function MenuOption(props) {
+        _classCallCheck(this, MenuOption);
+
+        return _possibleConstructorReturn(this, (MenuOption.__proto__ || Object.getPrototypeOf(MenuOption)).call(this, props));
+
+        // this.handleChange = this.handleChange.bind(this);
+        // this.handleItemAddition = this.handleItemAddition.bind(this);
+    }
+
+    // handleChange(event) {
+    //     // this.setState({value: event.target.value});
+    // }
+
+    _createClass(MenuOption, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {}
+        // ListStore.bind('change', this.listUpdated);
+
+
+        // handleItemAddition(index, item) {
+        //     console.log(index);
+        //     console.log(item);
+        //
+        //     const order = [
+        //         ...this.state.order,
+        //         {
+        //             name: item.target.innerHTML//,
+        //             // addons: ,
+        //             // cost:
+        //             // name: item.name,
+        //             // cost: item.cost
+        //         }
+        //     ]
+        //
+        //     this.setState({order});
+        //
+        //     // isChecked = true;
+        //     //
+        //     // console.log(isChecked);
+        // }
+
+    }, {
+        key: 'render',
+        value: function render() {
+            var name = this.props.name;
+
+            // console.log(isChecked);
+
+            console.log(menu);
+
+            return _react2.default.createElement(
+                'li',
+                { key: key, className: name, onClick: this.props.onItemClick() },
+                name
+            );
+        }
+    }]);
+
+    return MenuOption;
+}(_react.Component);
+
+MenuOption.propTypes = {
+    // menu: PropTypes.array.isRequired,
+    onItemClick: _propTypes2.default.func
+};
+
+MenuOption.defaultProps = {
+    onItemClick: function onItemClick(f) {
+        return f;
+    }
+};
+
+exports.default = MenuOption;
 
 /***/ })
 /******/ ]);

@@ -8,7 +8,7 @@ import ListStore from './stores/listStore.js';
 import axios from 'axios';
 import async from 'babel-polyfill';
 
-import MenuOptions from './components/MenuOptions.js';
+import MenuOption from './components/MenuOption.js';
 import OrderCalculator from './components/OrderCalculator.js'
 
 // Load Stylesheets
@@ -26,7 +26,7 @@ class App extends React.Component {
         };
 
         // Reminder that it's always good to bind in the constructor
-        // this.handleItemAddition = this.handleItemAddition.bind(this);
+        this.handleItemAddition = this.handleItemAddition.bind(this);
     }
 
     componentWillMount() {
@@ -88,27 +88,29 @@ class App extends React.Component {
         });
     }
 
-    // handleItemAddition(index, item) {
-    //     console.log(item);
-    //     console.log(index);
-    //
-    //     const order = [
-    //         ...this.state.order,
-    //         {
-    //             name: item.target.innerHTML//,
-    //             // addons: ,
-    //             // cost:
-    //             // name: item.name,
-    //             // cost: item.cost
-    //         }
-    //     ]
-    //
-    //     this.setState({order});
-    //
-    //     // isChecked = true;
-    //     //
-    //     // console.log(isChecked);
-    // }
+    handleItemAddition(event) {
+        // console.log(item);
+        // console.log(index);
+
+        console.log(event);
+
+        const order = [
+            ...this.state.order,
+            {
+                name: event.target.innerHTML//,
+                // addons: ,
+                // cost:
+                // name: item.name,
+                // cost: item.cost
+            }
+        ]
+
+        this.setState({order});
+
+        // isChecked = true;
+        //
+        // console.log(isChecked);
+    }
 
     // componentDidMount() {
     //     // ListStore.bind('change', this.listUpdated);
@@ -132,9 +134,13 @@ class App extends React.Component {
         let { menu, order } = this.state;
         // let { checked } = this.props;
 
+        console.log(menu);
+
         return (menu.length) ?
             <div>
-                <MenuOptions menu={menu} orderState={this.state.order} />
+                {menu.map(
+                    (elem, key) => <MenuOption name={elem.name} key={key} onItemClick={() => this.handleItemAddition} />
+                )}
                 <OrderCalculator order={order} menu={menu} />
             </div> :
             <div>No Menu</div>

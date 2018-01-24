@@ -1,18 +1,18 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-class MenuOptions extends Component {
+class MenuOption extends Component {
 
     constructor(props) {
         super(props);
 
-        this.handleChange = this.handleChange.bind(this);
+        // this.handleChange = this.handleChange.bind(this);
         // this.handleItemAddition = this.handleItemAddition.bind(this);
     }
 
-    handleChange(event) {
-        // this.setState({value: event.target.value});
-    }
+    // handleChange(event) {
+    //     // this.setState({value: event.target.value});
+    // }
 
     componentDidMount() {
         // ListStore.bind('change', this.listUpdated);
@@ -42,35 +42,25 @@ class MenuOptions extends Component {
 
     render() {
 
-        const menu = this.props;
+        const { name } = this.props;
 
         // console.log(isChecked);
 
         console.log(menu);
 
         return(
-            <div>
-                <div className="addition-container">
-                    <p>Hello Burrito!!</p>
-                    <ul>
-                        {menu.menu.map(
-                            (elem, index) => <li key={index} className={elem.name}  onClick={this.props.onItemClick()}>{elem.name}</li>
-                        )}
-                    </ul>
-                    <button className="add-item" onClick={this.placeOrder}>Add To Order</button>
-                </div>
-            </div>
+            <li key={key} className={name} onClick={this.props.onItemClick()}>{name}</li>
         )
     }
 }
 
-MenuOptions.propTypes = {
-    menu: PropTypes.array.isRequired,
+MenuOption.propTypes = {
+    // menu: PropTypes.array.isRequired,
     onItemClick: PropTypes.func
 }
 
-MenuOptions.defaultProps = {
+MenuOption.defaultProps = {
     onItemClick: f=>f
 }
 
-export default MenuOptions;
+export default MenuOption;
