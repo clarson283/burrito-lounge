@@ -8,7 +8,7 @@ import ListStore from './stores/listStore.js';
 import axios from 'axios';
 import async from 'babel-polyfill';
 
-import MenuOption from './components/MenuOption.js';
+import MenuOption from './components/menuOption.js';
 import OrderCalculator from './components/OrderCalculator.js'
 
 // Load Stylesheets
@@ -31,6 +31,34 @@ class App extends React.Component {
 
     componentWillMount() {
 
+        // axios.get('/menu')
+        //     .then(res => {
+        //         let data = res.data,
+        //             tableArray = [];
+        //
+        //         data.map(obj => tableArray.push(
+        //             {
+        //                 "id": obj.id,
+        //                 "name": obj.name,
+        //                 "cost": obj.cost
+        //             }
+        //         ));
+        //
+        //         console.log('running here');
+        //
+        //         this.setState({
+        //             menu: tableArray
+        //         });
+        //
+        //         console.log(menu);
+        //     })
+        //     .catch(function(err) {
+        //         console.log('Fetching error:', err.message);
+        //     });
+    }
+
+    componentDidMount() {
+
         axios.get('/menu')
             .then(res => {
                 let data = res.data,
@@ -44,17 +72,46 @@ class App extends React.Component {
                     }
                 ));
 
+                // console.log(this.state);
+
                 this.setState({
                     menu: tableArray
                 });
+
+                // console.log(this.state);
+
+                // console.log('running heree');
+
+
+                // console.log(this.state.menu);
             })
             .catch(function(err) {
-                console.log('Fetching error: ', err.message);
+                console.log('Fetching error:', err.message);
             });
-    }
 
-    componentDidMount() {
-
+        // axios.get('/menu')
+        //     .then(res => {
+        //         console.log(menu);
+        //
+        //         let data = res.data,
+        //             tableArray = [];
+        //
+        //         data.map(obj => tableArray.push(
+        //             {
+        //                 "id": obj.id,
+        //                 "name": obj.name,
+        //                 "cost": obj.cost
+        //             }
+        //         ));
+        //
+        //         this.setState({
+        //             menu: tableArray
+        //         });
+        //     })
+        //     .catch(function(err) {
+        //         console.log('Error config: ', err.config);
+        //         console.log('Fetching error: ', err.message);
+        //     });
     }
 
     // handleChange(event) {
@@ -92,7 +149,7 @@ class App extends React.Component {
         // console.log(item);
         // console.log(index);
 
-        console.log(event);
+        // console.log(event);
 
         const order = [
             ...this.state.order,
@@ -134,16 +191,18 @@ class App extends React.Component {
         let { menu, order } = this.state;
         // let { checked } = this.props;
 
-        console.log(menu);
-
-        return (menu.length) ?
+        return(
             <div>
-                {menu.map(
-                    (elem, key) => <MenuOption name={elem.name} key={key} onItemClick={() => this.handleItemAddition} />
-                )}
+                <div className="addition-container">
+                    <ul>
+                        {menu.map(
+                            (elem) => <MenuOption name={elem.name} id={elem.id} onItemClick={() => this.handleItemAddition} />
+                        )}
+                    </ul>
+                </div>
                 <OrderCalculator order={order} menu={menu} />
-            </div> :
-            <div>No Menu</div>
+            </div>
+        )
     }
 }
 

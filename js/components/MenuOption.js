@@ -42,14 +42,12 @@ class MenuOption extends Component {
 
     render() {
 
-        const { name } = this.props;
+        const { name, id } = this.props;
 
         // console.log(isChecked);
 
-        console.log(menu);
-
         return(
-            <li key={key} className={name} onClick={this.props.onItemClick()}>{name}</li>
+            <li className={name} key={id.toString()} onClick={this.props.onItemClick()}>{name}</li>
         )
     }
 }
