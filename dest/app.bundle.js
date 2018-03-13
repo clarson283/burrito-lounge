@@ -17287,9 +17287,9 @@ var _babelPolyfill = __webpack_require__(350);
 
 var _babelPolyfill2 = _interopRequireDefault(_babelPolyfill);
 
-var _menuOption = __webpack_require__(552);
+var _MenuOptions = __webpack_require__(552);
 
-var _menuOption2 = _interopRequireDefault(_menuOption);
+var _MenuOptions2 = _interopRequireDefault(_MenuOptions);
 
 var _OrderCalculator = __webpack_require__(554);
 
@@ -17307,6 +17307,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // import AppContainer from './containers/AppContainer.js';
 
 // import AppDispatcher from './dispatcher.js';
+
+
+// import MenuOption from './components/menuOption.js';
 
 
 // Load Stylesheets
@@ -17333,33 +17336,7 @@ var App = function (_React$Component) {
 
     _createClass(App, [{
         key: 'componentWillMount',
-        value: function componentWillMount() {
-
-            // axios.get('/menu')
-            //     .then(res => {
-            //         let data = res.data,
-            //             tableArray = [];
-            //
-            //         data.map(obj => tableArray.push(
-            //             {
-            //                 "id": obj.id,
-            //                 "name": obj.name,
-            //                 "cost": obj.cost
-            //             }
-            //         ));
-            //
-            //         console.log('running here');
-            //
-            //         this.setState({
-            //             menu: tableArray
-            //         });
-            //
-            //         console.log(menu);
-            //     })
-            //     .catch(function(err) {
-            //         console.log('Fetching error:', err.message);
-            //     });
-        }
+        value: function componentWillMount() {}
     }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
@@ -17373,49 +17350,17 @@ var App = function (_React$Component) {
                     return tableArray.push({
                         "id": obj.id,
                         "name": obj.name,
-                        "cost": obj.cost
+                        "cost": obj.cost,
+                        "checked": false
                     });
                 });
-
-                // console.log(this.state);
 
                 _this2.setState({
                     menu: tableArray
                 });
-
-                // console.log(this.state);
-
-                // console.log('running heree');
-
-
-                // console.log(this.state.menu);
             }).catch(function (err) {
                 console.log('Fetching error:', err.message);
             });
-
-            // axios.get('/menu')
-            //     .then(res => {
-            //         console.log(menu);
-            //
-            //         let data = res.data,
-            //             tableArray = [];
-            //
-            //         data.map(obj => tableArray.push(
-            //             {
-            //                 "id": obj.id,
-            //                 "name": obj.name,
-            //                 "cost": obj.cost
-            //             }
-            //         ));
-            //
-            //         this.setState({
-            //             menu: tableArray
-            //         });
-            //     })
-            //     .catch(function(err) {
-            //         console.log('Error config: ', err.config);
-            //         console.log('Fetching error: ', err.message);
-            //     });
         }
 
         // handleChange(event) {
@@ -17452,11 +17397,8 @@ var App = function (_React$Component) {
         }
     }, {
         key: 'handleItemAddition',
-        value: function handleItemAddition(event) {
-            // console.log(item);
-            // console.log(index);
-
-            // console.log(event);
+        value: function handleItemAddition(id) {
+            console.log(id);
 
             var order = [].concat(_toConsumableArray(this.state.order), [{
                 name: event.target.innerHTML //,
@@ -17468,9 +17410,17 @@ var App = function (_React$Component) {
 
             this.setState({ order: order });
 
-            // isChecked = true;
-            //
-            // console.log(isChecked);
+            // console.log(this);
+
+            // console.log(this.state.menu);
+
+            // console.log(event);
+
+            // console.log(object);
+
+            // console.log(key);
+
+            // this.props.checked = true;
         }
 
         // componentDidMount() {
@@ -17493,8 +17443,6 @@ var App = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            var _this3 = this;
-
             var _state = this.state,
                 menu = _state.menu,
                 order = _state.order;
@@ -17503,20 +17451,10 @@ var App = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement(
-                    'div',
-                    { className: 'addition-container' },
-                    _react2.default.createElement(
-                        'ul',
-                        null,
-                        menu.map(function (elem) {
-                            return _react2.default.createElement(_menuOption2.default, { name: elem.name, id: elem.id, onItemClick: function onItemClick() {
-                                    return _this3.handleItemAddition;
-                                } });
-                        })
-                    )
-                ),
-                _react2.default.createElement(_OrderCalculator2.default, { order: order, menu: menu })
+                _react2.default.createElement(_MenuOptions2.default, { menu: menu,
+                    onItemClick: this.handleItemAddition }),
+                _react2.default.createElement(_OrderCalculator2.default, { order: order,
+                    menu: menu })
             );
         }
     }]);
@@ -34505,23 +34443,25 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var MenuOption = function (_Component) {
-    _inherits(MenuOption, _Component);
+var MenuOptions = function (_Component) {
+    _inherits(MenuOptions, _Component);
 
-    function MenuOption(props) {
-        _classCallCheck(this, MenuOption);
+    function MenuOptions(props) {
+        _classCallCheck(this, MenuOptions);
 
-        return _possibleConstructorReturn(this, (MenuOption.__proto__ || Object.getPrototypeOf(MenuOption)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (MenuOptions.__proto__ || Object.getPrototypeOf(MenuOptions)).call(this, props));
 
-        // this.handleChange = this.handleChange.bind(this);
+        _this.handleChange = _this.handleChange.bind(_this);
         // this.handleItemAddition = this.handleItemAddition.bind(this);
+        return _this;
     }
 
-    // handleChange(event) {
-    //     // this.setState({value: event.target.value});
-    // }
-
-    _createClass(MenuOption, [{
+    _createClass(MenuOptions, [{
+        key: 'handleChange',
+        value: function handleChange(event) {
+            // this.setState({value: event.target.value});
+        }
+    }, {
         key: 'componentDidMount',
         value: function componentDidMount() {}
         // ListStore.bind('change', this.listUpdated);
@@ -34552,35 +34492,49 @@ var MenuOption = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            var _props = this.props,
-                name = _props.name,
-                id = _props.id;
+            var _this2 = this;
 
-            // console.log(isChecked);
+            var menu = this.props;
 
             return _react2.default.createElement(
-                'li',
-                { className: name, key: id.toString(), onClick: this.props.onItemClick() },
-                name
+                'div',
+                null,
+                _react2.default.createElement(
+                    'div',
+                    { className: 'addition-container' },
+                    _react2.default.createElement(
+                        'ul',
+                        null,
+                        menu.menu.map(function (elem, index) {
+                            return _react2.default.createElement(
+                                'li',
+                                { key: index, className: elem.name, onClick: function onClick() {
+                                        return _this2.props.onItemClick(elem.id);
+                                    } },
+                                elem.name
+                            );
+                        })
+                    )
+                )
             );
         }
     }]);
 
-    return MenuOption;
+    return MenuOptions;
 }(_react.Component);
 
-MenuOption.propTypes = {
-    // menu: PropTypes.array.isRequired,
+MenuOptions.propTypes = {
+    menu: _propTypes2.default.array.isRequired,
     onItemClick: _propTypes2.default.func
 };
 
-MenuOption.defaultProps = {
+MenuOptions.defaultProps = {
     onItemClick: function onItemClick(f) {
         return f;
     }
 };
 
-exports.default = MenuOption;
+exports.default = MenuOptions;
 
 /***/ }),
 /* 553 */

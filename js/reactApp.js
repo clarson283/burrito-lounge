@@ -8,7 +8,8 @@ import ListStore from './stores/listStore.js';
 import axios from 'axios';
 import async from 'babel-polyfill';
 
-import MenuOption from './components/menuOption.js';
+// import MenuOption from './components/menuOption.js';
+import MenuOptions from './components/MenuOptions.js';
 import OrderCalculator from './components/OrderCalculator.js'
 
 // Load Stylesheets
@@ -31,30 +32,6 @@ class App extends React.Component {
 
     componentWillMount() {
 
-        // axios.get('/menu')
-        //     .then(res => {
-        //         let data = res.data,
-        //             tableArray = [];
-        //
-        //         data.map(obj => tableArray.push(
-        //             {
-        //                 "id": obj.id,
-        //                 "name": obj.name,
-        //                 "cost": obj.cost
-        //             }
-        //         ));
-        //
-        //         console.log('running here');
-        //
-        //         this.setState({
-        //             menu: tableArray
-        //         });
-        //
-        //         console.log(menu);
-        //     })
-        //     .catch(function(err) {
-        //         console.log('Fetching error:', err.message);
-        //     });
     }
 
     componentDidMount() {
@@ -68,50 +45,18 @@ class App extends React.Component {
                     {
                         "id": obj.id,
                         "name": obj.name,
-                        "cost": obj.cost
+                        "cost": obj.cost,
+                        "checked": false
                     }
                 ));
-
-                // console.log(this.state);
 
                 this.setState({
                     menu: tableArray
                 });
-
-                // console.log(this.state);
-
-                // console.log('running heree');
-
-
-                // console.log(this.state.menu);
             })
             .catch(function(err) {
                 console.log('Fetching error:', err.message);
             });
-
-        // axios.get('/menu')
-        //     .then(res => {
-        //         console.log(menu);
-        //
-        //         let data = res.data,
-        //             tableArray = [];
-        //
-        //         data.map(obj => tableArray.push(
-        //             {
-        //                 "id": obj.id,
-        //                 "name": obj.name,
-        //                 "cost": obj.cost
-        //             }
-        //         ));
-        //
-        //         this.setState({
-        //             menu: tableArray
-        //         });
-        //     })
-        //     .catch(function(err) {
-        //         console.log('Error config: ', err.config);
-        //         console.log('Fetching error: ', err.message);
-        //     });
     }
 
     // handleChange(event) {
@@ -145,11 +90,8 @@ class App extends React.Component {
         });
     }
 
-    handleItemAddition(event) {
-        // console.log(item);
-        // console.log(index);
-
-        // console.log(event);
+    handleItemAddition(id) {
+        console.log(id);
 
         const order = [
             ...this.state.order,
@@ -164,9 +106,17 @@ class App extends React.Component {
 
         this.setState({order});
 
-        // isChecked = true;
-        //
-        // console.log(isChecked);
+        // console.log(this);
+
+        // console.log(this.state.menu);
+
+        // console.log(event);
+
+        // console.log(object);
+
+        // console.log(key);
+
+        // this.props.checked = true;
     }
 
     // componentDidMount() {
@@ -193,14 +143,10 @@ class App extends React.Component {
 
         return(
             <div>
-                <div className="addition-container">
-                    <ul>
-                        {menu.map(
-                            (elem) => <MenuOption name={elem.name} id={elem.id} onItemClick={() => this.handleItemAddition} />
-                        )}
-                    </ul>
-                </div>
-                <OrderCalculator order={order} menu={menu} />
+                <MenuOptions menu={menu}
+                    onItemClick={this.handleItemAddition} />
+                <OrderCalculator order={order}
+                    menu={menu} />
             </div>
         )
     }

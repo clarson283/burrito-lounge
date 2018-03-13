@@ -44,20 +44,14 @@ class MenuOptions extends Component {
 
         const menu = this.props;
 
-        // console.log(isChecked);
-
-        console.log(menu);
-
-        return(
+        return (
             <div>
                 <div className="addition-container">
-                    <p>Hello Burrito!!</p>
                     <ul>
                         {menu.menu.map(
-                            (elem, index) => <li key={index} className={elem.name}  onClick={this.props.onItemClick()}>{elem.name}</li>
+                            (elem, index) => <li key={index} className={elem.name} onClick={() => this.props.onItemClick(elem.id)}>{elem.name}</li>
                         )}
                     </ul>
-                    <button className="add-item" onClick={this.placeOrder}>Add To Order</button>
                 </div>
             </div>
         )
