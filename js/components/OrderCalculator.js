@@ -10,6 +10,8 @@ class OrderCalculator extends Component {
     render() {
         const order = this.props;
 
+        console.log(order.order);
+
         return(
             <div>
                 <div className="order-container">
@@ -17,7 +19,7 @@ class OrderCalculator extends Component {
                     <p>Quantity:</p>
                     <ul>
                         {order.order.length ? order.order.map(
-                            (elem, index) => <li key={index} className={elem.name}>{elem.name}</li>
+                            (elem, index) => <li key={index} className={elem.addedItem.name}>{elem.addedItem.name}</li>
                         ) : <li>No Order Items</li>}
                     </ul>
                 </div>

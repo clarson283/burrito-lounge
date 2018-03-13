@@ -17398,27 +17398,15 @@ var App = function (_React$Component) {
     }, {
         key: 'handleItemAddition',
         value: function handleItemAddition(id) {
-            console.log(id);
+            var item = this.state.menu.filter(function (item) {
+                return item.id == id;
+            });
 
-            var order = [].concat(_toConsumableArray(this.state.order), [{
-                name: event.target.innerHTML //,
-                // addons: ,
-                // cost:
-                // name: item.name,
-                // cost: item.cost
-            }]);
+            var addedItem = item[0];
+
+            var order = [].concat(_toConsumableArray(this.state.order), [{ addedItem: addedItem }]);
 
             this.setState({ order: order });
-
-            // console.log(this);
-
-            // console.log(this.state.menu);
-
-            // console.log(event);
-
-            // console.log(object);
-
-            // console.log(key);
 
             // this.props.checked = true;
         }
@@ -34648,6 +34636,8 @@ var OrderCalculator = function (_Component) {
         value: function render() {
             var order = this.props;
 
+            console.log(order.order);
+
             return _react2.default.createElement(
                 'div',
                 null,
@@ -34670,8 +34660,8 @@ var OrderCalculator = function (_Component) {
                         order.order.length ? order.order.map(function (elem, index) {
                             return _react2.default.createElement(
                                 'li',
-                                { key: index, className: elem.name },
-                                elem.name
+                                { key: index, className: elem.addedItem.name },
+                                elem.addedItem.name
                             );
                         }) : _react2.default.createElement(
                             'li',

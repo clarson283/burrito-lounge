@@ -91,30 +91,16 @@ class App extends React.Component {
     }
 
     handleItemAddition(id) {
-        console.log(id);
+        const item = this.state.menu.filter(item => item.id == id);
+
+        const addedItem = item[0];
 
         const order = [
             ...this.state.order,
-            {
-                name: event.target.innerHTML//,
-                // addons: ,
-                // cost:
-                // name: item.name,
-                // cost: item.cost
-            }
+            {addedItem}
         ]
 
         this.setState({order});
-
-        // console.log(this);
-
-        // console.log(this.state.menu);
-
-        // console.log(event);
-
-        // console.log(object);
-
-        // console.log(key);
 
         // this.props.checked = true;
     }
