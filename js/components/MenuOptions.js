@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import MenuOption from './MenuOption.js';
 
 class MenuOptions extends Component {
 
@@ -42,14 +43,16 @@ class MenuOptions extends Component {
 
     render() {
 
-        const menu = this.props;
+        const { menu, elem, selected } = this.props;
+
+        console.log(selected);
 
         return (
             <div>
                 <div className="addition-container">
                     <ul>
-                        {menu.menu.map(
-                            (elem, index) => <li key={index} className={elem.name} onClick={() => this.props.onItemClick(elem.id)}>{elem.name}</li>
+                        {menu.map(
+                            (elem, index) => <MenuOption key={index} selected={menu[index].selected} elem={elem} onClick={() => this.props.onItemClick(elem.id)} />
                         )}
                     </ul>
                 </div>
@@ -60,6 +63,7 @@ class MenuOptions extends Component {
 
 MenuOptions.propTypes = {
     menu: PropTypes.array.isRequired,
+    selected: PropTypes.bool,
     onItemClick: PropTypes.func
 }
 

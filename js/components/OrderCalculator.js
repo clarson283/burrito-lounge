@@ -10,7 +10,7 @@ class OrderCalculator extends Component {
     render() {
         const order = this.props;
 
-        console.log(order.order);
+        // console.log(order.order);
 
         return(
             <div>

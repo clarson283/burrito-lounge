@@ -35,7 +35,6 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-
         axios.get('/menu')
             .then(res => {
                 let data = res.data,
@@ -46,7 +45,7 @@ class App extends React.Component {
                         "id": obj.id,
                         "name": obj.name,
                         "cost": obj.cost,
-                        "checked": false
+                        "selected": false
                     }
                 ));
 
@@ -102,7 +101,13 @@ class App extends React.Component {
 
         this.setState({order});
 
-        // this.props.checked = true;
+        console.log(addedItem);
+
+        if (addedItem.selected === true) {
+            addedItem.selected = false;
+        } else {
+            addedItem.selected = true;
+        }
     }
 
     // componentDidMount() {
@@ -125,7 +130,6 @@ class App extends React.Component {
     render() {
 
         let { menu, order } = this.state;
-        // let { checked } = this.props;
 
         return(
             <div>
@@ -141,7 +145,6 @@ class App extends React.Component {
 App.propTypes = {
     menu: React.PropTypes.array,
     order: React.PropTypes.array,
-    // checked: React.PropTypes.boolean,
     onItemClick: React.PropTypes.func
 }
 
