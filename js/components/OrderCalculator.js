@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import OrderItem from './OrderItem.js';
 
 // const OrderItem = ({name, addons, cost}) => {
 //     <li>{name}</li>
@@ -19,7 +20,8 @@ class OrderCalculator extends Component {
                     <p>Quantity:</p>
                     <ul>
                         {order.order.length ? order.order.map(
-                            (elem, index) => <li key={index} className={elem.addedItem.name}>{elem.addedItem.name}</li>
+                            (elem, index) =>
+                                <OrderItem index={index} item={elem} />
                         ) : <li>No Order Items</li>}
                     </ul>
                 </div>

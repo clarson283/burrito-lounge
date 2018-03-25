@@ -81,6 +81,43 @@ body {
             li {
                 padding: 1em;
                 border-bottom: 1px solid #e1e1e1;
+
+                span {
+
+                    &.quantity {
+                        float: right;
+                    }
+
+                    i {
+                        display: inline-block;
+                        border-radius: 50%;
+                        height: 18px;
+                        width: 8px;
+                        padding: 0 5px;
+                        background: black;
+                        color: white;
+                        cursor: pointer;
+
+                        &.minus {
+                            margin-right: 4px;
+
+                            &:before {
+                                content: '-';
+                                vertical-align: middle;
+                                padding: 0 1px;
+                            }
+                        }
+
+                        &.plus {
+                            margin-left: 4px;
+
+                            &:before {
+                                content: '+';
+                                vertical-align: middle;
+                            }
+                        }
+                    }
+                }
             }
         }
     }
